@@ -18,7 +18,7 @@ const Footer = () => {
       <div className="cursor-pointer">
         {isHomePage ? (
           <ScrollLink to="hero" smooth={true} duration={500} delay={200}>
-            <Image src="/logo-light.svg" alt="logo" width={28} height={28} />
+            <Image src="/noman_circle.png" alt="logo" width={48} height={48} />
           </ScrollLink>
         ) : (
           <Link href="/">
@@ -37,7 +37,7 @@ const Footer = () => {
         ))}
       </div>
       <div className="text-medium text-neutral-400">
-        © {currentYear} • Jenson Caparida • All Rights Reserved.
+        © {currentYear} • Md Abdullah Al Noman • All Rights Reserved.
       </div>
       <div className="flex space-x-2">
         <div className="h-6 w-6 rounded-full bg-[var(--primary)] shadow shadow-zinc-500" />

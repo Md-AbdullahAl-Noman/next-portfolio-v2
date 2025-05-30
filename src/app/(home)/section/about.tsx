@@ -47,7 +47,7 @@ const About = () => {
         <ProfileImage />
         <ProfileContent />
       </div>
-      <ExperienceTimeline />
+      <Experience />
     </motion.div>
   )
 }
@@ -81,7 +81,7 @@ const ProfileImage = () => {
       className="relative aspect-square h-full w-full md:max-h-[450px] md:max-w-[450px]"
     >
       <Image
-        src=""
+        src="/main-photo.jpg"
         alt={'profile picture'}
         fill
         priority
@@ -194,7 +194,7 @@ const ProfileContent = () => {
   )
 }
 
-const ExperienceTimeline = () => {
+const Experience = () => {
   const observerRef = useRef<IntersectionObserver | null>(null)
   const timelineRef = useRef<HTMLDivElement>(null)
 
@@ -225,7 +225,7 @@ const ExperienceTimeline = () => {
   }, [])
 
   return (
-    <div className="z-50 min-h-screen px-4 py-16">
+    <div className="min-h-screen px-4 py-16">
       <div className="mx-auto max-w-3xl">
         <div className="relative mt-12" ref={timelineRef}>
           <div className="absolute left-1/2 h-full w-1 -translate-x-1/2 transform bg-gray-700">
@@ -260,12 +260,12 @@ const ExperienceTimeline = () => {
                     </div>
                   </div>
                   <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform">
-                    <div className="rounded-full p-2 shadow-lg">
+                    <div className="rounded-full bg-gray-600 px-2 py-2 shadow-lg">
                       {item.icon && (
                         <Image
                           src={item.icon}
                           alt={item.title}
-                          className="mb-4 rounded-full bg-transparent"
+                          className=" rounded-full bg-black"
                           width={42}
                           height={42}
                         />

@@ -10,8 +10,22 @@ import { Link as ScrollLink } from 'react-scroll'
 import { FlipWords } from '@/components/flip-words'
 
 const Hero = () => {
-  const firstName = ['J', 'e', 'n', 's', 'o', 'n']
-  const lastName = ['C', 'a', 'p', 'a', 'r', 'i', 'd', 'a']
+  const firstName = [
+    'M',
+    'd',
+    ' ',
+    'A',
+    'b',
+    'd',
+    'u',
+    'l',
+    'l',
+    'a',
+    'h',
+    'a',
+    'l',
+  ]
+  const lastName = ['N', 'o', 'm', 'a', 'n']
 
   const heroVariants: Variants = {
     initial: {
@@ -98,18 +112,20 @@ const Hero = () => {
         animate="animate"
         className="flex space-x-4"
       >
-        <div className="text-4xl font-bold  sm:text-5xl md:text-7xl">
+        <div className="text-4xl font-bold sm:text-5xl md:text-7xl">
           {firstName.map((letter, index) => (
             <motion.span
               variants={letterChildVariants}
               key={index}
-              className="cursor-default transition-colors duration-500 ease-out hover:text-[var(--primary)]"
+              className={`cursor-default transition-colors duration-500 ease-out hover:text-[var(--primary)] ${
+                letter === ' ' ? 'mr-2' : ''
+              }`}
             >
               {letter}
             </motion.span>
           ))}
         </div>
-        <div className="text-4xl font-bold  sm:text-5xl md:text-7xl">
+        <div className="text-4xl font-bold sm:text-5xl md:text-7xl">
           {lastName.map((letter, index) => (
             <motion.span
               variants={letterChildVariants}
@@ -121,14 +137,21 @@ const Hero = () => {
           ))}
         </div>
       </motion.div>
-      {/* HERO SUBHEADING */}
+
+      {/* Update the FlipWords component with your roles */}
       <motion.div variants={heroChildVariants} className="relative h-[28px]">
         <FlipWords
           className="absolute m-0 whitespace-nowrap p-0 font-serif text-lg uppercase italic"
-          words={['Software Developer', 'UX/UI Designer', 'Automation Tester']}
-          duration={3000}
+          words={[
+            'Software Engineer',
+            'Full Stack Developer',
+            'DevOps Enthusiast',
+          ]}
+          duration={2000} // Reduced duration for faster animation
         />
       </motion.div>
+      {/* HERO SUBHEADING */}
+
       {/* HERO BUTTONS */}
       <div className="flex flex-row space-x-4 pt-2">
         <motion.div variants={heroChildVariants}>

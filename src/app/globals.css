@@ -155,3 +155,33 @@ section {
   width: 150%;
   height: 150%;
 }
+/* Timeline animations */
+.timeline-item {
+  opacity: 0;
+}
+
+.timeline-item.left-item {
+  transform: translateX(-100px);
+}
+
+.timeline-item.right-item {
+  transform: translateX(100px);
+}
+
+.timeline-item.timeline-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 0.8s ease-out;
+}
+
+/* Progress line */
+.timeline-progress {
+  position: fixed;
+  top: 15%;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  height: var(--scroll-percentage, 0%);
+  transition: height 0.1s ease-in;
+  z-index: 50;
+}

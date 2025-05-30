@@ -13,7 +13,10 @@ export default function Home() {
   return (
     <main>
       <BackgroundParticles />
-      <section id="hero">
+      <section 
+        id="hero"
+        className="h-full min-h-screen rounded-b-[200px] border-b"
+      >
         <Container>
           <NavBar />
           <Hero />

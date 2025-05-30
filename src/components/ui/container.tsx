@@ -1,5 +1,6 @@
 export const Container = ({
   children,
-}: Readonly<{ children: React.ReactNode }>) => {
-  return <div className="mx-auto max-w-6xl px-8">{children}</div>
+  className = '',
+}: Readonly<{ children: React.ReactNode; className?: string }>) => {
+  return <div className={`mx-auto max-w-6xl px-8 ${className}`}>{children}</div>
 }
