@@ -48,14 +48,8 @@ const NavBar = () => {
       variants={navBarVariants}
       initial="initial"
       animate="animate"
-      className="flex h-[10vh] w-full items-center justify-between"
+      className="flex h-[10vh] w-full items-center justify-center"
     >
-      {/* LOGO */}
-      <motion.div variants={navBarChildVariants}>
-        <Link href="/" className="h-auto w-auto">
-          <Image src="/logo-light.svg" alt="logo" width={32} height={32} />
-        </Link>
-      </motion.div>
       {/* LINKS */}
       <motion.div className="hidden flex-row space-x-6 sm:flex">
         {links.map((item) => (
