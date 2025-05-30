@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Contact Form Submission</title>
+  </head>
+  <body
+    style="
+      background-color: #252422;
+      font-family:
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        'Segoe UI',
+        Roboto,
+        Oxygen,
+        Ubuntu,
+        Cantarell,
+        'Open Sans',
+        'Helvetica Neue',
+        sans-serif;
+    "
+  >
+    <table
+      align="center"
+      border="0"
+      cellpadding="0"
+      cellspacing="0"
+      width="100%"
+      style="max-width: 600px"
+    >
+      <tr>
+        <td align="left" valign="top">
+          <div style="width: 100%; max-width: 600px">
+            <!-- image -->
+            <div
+              style="
+                height: 40px;
+                background-color: #0074c8;
+                border-radius: 2px 2px 0 0;
+                padding: 8px;
+                display: flex;
+                align-items: center;
+              "
+            >
+              <h2 style="font-size: large; color: #fff">
+                New Contact Form Inquiry
+              </h2>
+            </div>
+            <!-- form-content -->
+            <div
+              style="
+                background-color: #fffcf2;
+                padding: 8px;
+                border-radius: 0 0 2px 2px;
+                font-size: 16px;
+              "
+            >
+              <p>
+                <span style="font-weight: bold">From: </span>{{name}}
+                &lt;{{email}}&gt;
+              </p>
+              <p style="text-indent: 5em">{{message}}</p>
+              <p style="padding-top: 40px">
+                <small style="font-size: small; color: #ff7e3d">
+                  This email was sent from the contact form on your website.
+                </small>
+              </p>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

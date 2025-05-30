@@ -1,0 +1,99 @@
+[
+  {
+    "id": "js-furniture",
+    "name": "JS Furniture",
+    "description": "A furniture store where customers can find everything they need to furnish their homes with style and comfort.",
+    "img": "js-furniture.png",
+    "techstack": [
+      "Next JS",
+      "TypeScript",
+      "Tailwind CSS",
+      "Stripe",
+      "Shadcn UI"
+    ],
+    "featured": true,
+    "links": {
+      "github": "https://github.com/Md Abdullah Al Noman/jsfurniture",
+      "live": "https://jsfurniture.vercel.app/"
+    },
+    "figma_link": "https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FuF0IlThXUDSWLtQGlxkpL4%2FJS-FURNITURE%3Ftype%3Ddesign%26node-id%3D0%253A1%26mode%3Ddesign%26t%3DhGVArvjT2MHPUIcp-1"
+  },
+  {
+    "id": "ecommerce-admin",
+    "name": "E-commerce Admin",
+    "description": "A full-stack e-commerce admin app that users can create, manage, and link their online stores with various APIs",
+    "img": "ecommerce-admin.png",
+    "techstack": [
+      "Next JS",
+      "TypeScript",
+      "PostgreSQL",
+      "Tailwind CSS",
+      "Shadcn UI",
+      "Clerk",
+      "Heroku"
+    ],
+    "featured": true,
+    "links": {
+      "github": "https://github.com/Md Abdullah Al Noman/ecommerce-admin",
+      "live": "https://ecommerce-admin-woad-eta.vercel.app/"
+    },
+    "figma_link": "https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2Fwvb1p9EU9TKI0ezntZPQAe%2FE-COMMERCE-ADMIN%3Ftype%3Ddesign%26node-id%3D0%253A1%26mode%3Ddesign%26t%3DuCqEiFvHmK4QCycq-1"
+  },
+  {
+    "id": "pcrs",
+    "name": "Pet Carrier Rental System",
+    "description": "A pet carrier rental system for malls that allows pet owners to rent pet carriers for their pets. Administrators can track their location in real-time. Our undergraduate thesis project.",
+    "img": "pcrs.png",
+    "techstack": [
+      "Node JS",
+      "TypeScript",
+      "Express",
+      "Next JS",
+      "MySQL",
+      "Tailwind CSS",
+      "Shadcn UI",
+      "Clerk",
+      "Socket IO",
+      "Arduino"
+    ],
+    "featured": true,
+    "links": {
+      "github": "",
+      "live": "https://pet-carrier-rms.vercel.app/"
+    },
+    "figma_link": "https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FP4x7CObhuayuJrPPuMkSlO%2FPCRS%3Fnode-id%3D0-1%26t%3Dsk4ADw3marjmCZ5e-1"
+  },
+  {
+    "id": "jz-resource-hub",
+    "name": "JZ Resource Hub",
+    "description": "A personal collection of tools, resources, guides and links by Jenson Caparida(@Jenzone)",
+    "img": "jz-resource-hub.png",
+    "techstack": ["Next JS", "TypeScript", "Tailwind CSS", "Shadcn UI"],
+    "featured": true,
+    "links": {
+      "github": "https://github.com/jenzone/jz-resource-hub",
+      "live": "https://jz-resource-hub.vercel.app/"
+    },
+    "figma_link": ""
+  },
+  {
+    "id": "ims",
+    "name": "Inventory Management System",
+    "description": "Inventory Management System (IMS) using Node.js, Express, MongoDB, and EJS. The final project for backend training by Bayan Academy",
+    "img": "ims.png",
+    "techstack": [
+      "Node JS",
+      "JavaScript",
+      "Express",
+      "EJS",
+      "MongoDB",
+      "Tailwind CSS"
+    ],
+    "featured": true,
+    "links": {
+      "github": "https://github.com/jenzone/inventory-management-system",
+      "live": "https://inventory-management-system-x7n2.onrender.com/"
+    },
+    "figma_link": ""
+  }
+]
