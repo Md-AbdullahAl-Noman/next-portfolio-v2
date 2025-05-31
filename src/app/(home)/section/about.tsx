@@ -81,7 +81,7 @@ const ProfileImage = () => {
       className="relative aspect-square h-full w-full md:max-h-[450px] md:max-w-[450px]"
     >
       <Image
-        src="/main-photo.jpg"
+        src="/main-photo.png"
         alt={'profile picture'}
         fill
         priority
@@ -167,10 +167,11 @@ const ProfileContent = () => {
           awarded academic scholarships for outstanding performance.
         </motion.div>
         <motion.div variants={profileContentChildVariants}>
-          💻 Currently, I am working as a Full Stack Developer at Levant IT,
-          where I design and develop responsive web applications using Next.js,
-          React, and other modern technologies. I am also actively learning
-          DevOps and enhancing my skills in Linux to broaden my expertise.
+          💻 Currently, I am working as a Lead Software Engineer Autoworx, where
+          I design and develop responsive web applications using Nest JS,
+          Next.js, React, and other modern technologies. I am also actively
+          learning DevOps and enhancing my skills in Linux to broaden my
+          expertise.
         </motion.div>
         <motion.div variants={profileContentChildVariants}>
           🚀 My interests include solving problems on LeetCode to refine my
@@ -181,7 +182,7 @@ const ProfileContent = () => {
       </div>
       <motion.div variants={profileContentChildVariants}>
         <Link
-          href="https://www.linkedin.com/in/Md Abdullah Al Noman/details/certifications/"
+          href="https://www.linkedin.com/in/abdullah-al-noman-se/details/certifications/"
           target="_blank"
         >
           <Button>

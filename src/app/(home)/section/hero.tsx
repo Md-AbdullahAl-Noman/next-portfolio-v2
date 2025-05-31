@@ -163,7 +163,10 @@ const Hero = () => {
           </ScrollLink>
         </motion.div>
         <motion.div variants={heroChildVariants}>
-          <Link href={'/Md Abdullah Al Noman-resume.pdf'} target="_blank">
+          <Link
+            href={'/MdAbdullahAlNoman_Resume_SoftwareEngineer.pdf'}
+            target="_blank"
+          >
             <Button>
               <DocumentArrowDownIcon className="mr-2 size-4" />
               Resume

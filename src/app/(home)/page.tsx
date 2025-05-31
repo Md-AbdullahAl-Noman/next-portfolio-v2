@@ -1,32 +1,29 @@
-import Hero from './section/hero'
 import About from './section/about'
-import Skills from './section/skills'
-import Projects from './section/projects'
 import Contact from './section/contact'
+import Hero from './section/hero'
+import Projects from './section/projects'
+import Skills from './section/skills'
 
-import NavBar from '@/components/navigation/nav-bar'
-import Footer from '@/components/navigation/footer'
-import { Container } from '@/components/ui/container'
 import BackgroundParticles from '@/components/bg-particles'
+import Footer from '@/components/navigation/footer'
+import NavigationTab from '@/components/navigation/nav-tab'
+import { Container } from '@/components/ui/container'
 
 export default function Home() {
   return (
-    <main>
+    <main className="relative  bg-[var(--foreground)]">
+      <NavigationTab />
       <BackgroundParticles />
-      <section 
-        id="hero"
-        className="h-full min-h-screen rounded-b-[200px] border-b"
-      >
-        <Container>
-          <NavBar />
-          <Hero />
-        </Container>
-      </section>
-      <div className="bg-[var(--foreground)] text-[var(--background)]">
-        <section
-          id="about"
-          className="h-full min-h-screen bg-[var(--foreground)]"
-        >
+
+      <div className=" h-full min-h-screen rounded-b-[100px] border-b bg-[#121212]">
+        <section id="hero">
+          <Container>
+            <Hero />
+          </Container>
+        </section>
+      </div>
+      <div className="to-[#e0ece4 bg-gradient-to-b from-[#f9f7f7] text-[var(--background)]">
+        <section id="about" className="h-full min-h-screen ">
           <Container>
             <About />
           </Container>
@@ -50,7 +47,7 @@ export default function Home() {
           </Container>
         </section>
       </div>
-      <div className="absolute w-full bg-[var(--background)]">
+      <div className=" w-full rounded-t-[100px] border-t bg-[#121212]">
         <Footer />
       </div>
     </main>

@@ -6,7 +6,10 @@
     "img": "/projects/autoworx.png",
     "techstack": ["Next.js", "React", "TypeScript", "Tailwind CSS", "MySQL"],
     "featured": true,
-    "github": "your-github-link",
-    "live": "your-live-link"
+    "links": {
+      "github": "your-github-link",
+      "live": "your-live-link"
+    },
+    "figma_link": "your-figma-link"
   }
 ]

@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation'
 import { Link as ScrollLink } from 'react-scroll'
 
 import { socials } from './social'
+import LeafLoader from '../leaf'
 
 const Footer = () => {
   const pathname = usePathname()
@@ -22,7 +23,7 @@ const Footer = () => {
           </ScrollLink>
         ) : (
           <Link href="/">
-            <Image src="/logo-light.svg" alt="logo" width={28} height={28} />
+            <Image src="/noman_circle.png" alt="logo" width={28} height={28} />
           </Link>
         )}
       </div>
@@ -48,6 +49,7 @@ const Footer = () => {
         <div className="h-6 w-6 rounded-full bg-[var(--background)] shadow shadow-zinc-500" />
         <div className="h-6 w-6 rounded-full bg-[var(--background-muted)] shadow shadow-zinc-500" />
       </div>
+      <LeafLoader />
     </footer>
   )
 }
