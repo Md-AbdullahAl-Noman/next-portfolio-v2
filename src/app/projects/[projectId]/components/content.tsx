@@ -3,7 +3,8 @@ import Image from 'next/image'
 
 import { SiGithub } from '@icons-pack/react-simple-icons'
 import { ChevronLeftIcon } from '@heroicons/react/24/solid'
-import Button from '@/components/ui/button'
+
+import { Button } from '@/components/ui/button'
 
 interface ProjectContentProps {
   data: {
@@ -64,7 +65,7 @@ const ProjectContent: React.FC<ProjectContentProps> = ({ data }) => {
       </div>
       <div className="flex space-x-4">
         <Link href={data.links.live}>
-          <Button>
+          <Button variant="outline">
             <SiGithub className="mr-2 size-4" />
             Live Demo
           </Button>
