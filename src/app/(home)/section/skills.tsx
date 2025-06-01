@@ -13,6 +13,7 @@ import {
 import { Heading } from '@/components/ui/heading'
 
 import { skills } from '@/data/skills-sets'
+import { BackgroundGradient } from '@/components/ui/bg-gradient'
 
 interface ISkillSets {
   name: string
@@ -135,17 +136,19 @@ const SkillSets = ({ skill }: { skill: ISkillSets }) => {
   }
 
   return (
-    <motion.div
-      layout
-      variants={skillSetsVariants}
-      initial="initial"
-      animate="animate"
-      exit="exit"
-      className="w-50 h-50 flex h-full w-full flex-col items-center justify-center space-y-2 whitespace-nowrap rounded-lg p-4 text-sm"
-    >
-      <div className="relative z-10">{skill.icon && <skill.icon />}</div>
-      <div className="relative z-10">{skill.name}</div>
-    </motion.div>
+    <BackgroundGradient>
+      <motion.div
+        layout
+        variants={skillSetsVariants}
+        initial="initial"
+        animate="animate"
+        exit="exit"
+        className="w-50 h-50 flex h-full w-full flex-col items-center justify-center space-y-2 whitespace-nowrap rounded-lg p-4 text-sm"
+      >
+        <div className="relative z-10">{skill.icon && <skill.icon />}</div>
+        <div className="relative z-10">{skill.name}</div>
+      </motion.div>
+    </BackgroundGradient>
   )
 }
 

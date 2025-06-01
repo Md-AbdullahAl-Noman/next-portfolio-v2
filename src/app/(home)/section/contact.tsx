@@ -40,9 +40,9 @@ const Contact = () => {
       animate={controls}
       className="flex w-full justify-between space-x-4 py-16"
     >
-      <div className="relative hidden aspect-square h-full w-full md:flex">
+      <div className="relative mr-28 hidden aspect-square h-full w-full md:flex">
         <Image
-          src="/room.png"
+          src="/pair-programming.png"
           alt="room"
           width={1920}
           height={1080}
