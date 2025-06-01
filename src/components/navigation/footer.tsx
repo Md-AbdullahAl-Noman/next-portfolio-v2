@@ -40,15 +40,6 @@ const Footer = () => {
       <div className="text-medium text-neutral-400">
         © {currentYear} • Md Abdullah Al Noman • All Rights Reserved.
       </div>
-      <div className="flex space-x-2">
-        <div className="h-6 w-6 rounded-full bg-[var(--primary)] shadow shadow-zinc-500" />
-        <div className="h-6 w-6 rounded-full bg-[var(--primary-light)] shadow shadow-zinc-500" />
-        <div className="h-6 w-6 rounded-full bg-[var(--accent)] shadow shadow-zinc-500" />
-        <div className="h-6 w-6 rounded-full bg-[var(--foreground)] shadow shadow-zinc-500" />
-        <div className="h-6 w-6 rounded-full bg-[var(--foreground-muted)] shadow shadow-zinc-500" />
-        <div className="h-6 w-6 rounded-full bg-[var(--background)] shadow shadow-zinc-500" />
-        <div className="h-6 w-6 rounded-full bg-[var(--background-muted)] shadow shadow-zinc-500" />
-      </div>
       <LeafLoader />
     </footer>
   )

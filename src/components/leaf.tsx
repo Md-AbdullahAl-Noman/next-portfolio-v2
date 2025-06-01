@@ -1,82 +1,83 @@
-"use client"
-import React from 'react';
-import styled from 'styled-components';
+'use client'
+import React from 'react'
+import styled from 'styled-components'
 
 const LeafLoader = () => {
   return (
     <StyledWrapper>
-      <div className="container">
-        <div className="loader" />
-        <div className="loader" />
-        <div className="loader" />
-        <div className="loader" />
-        <div className="loader" />
+      <div className="loader">
+        <span className="ball ball1" />
+        <span className="ball" />
+        <span className="ball" />
+        <span className="ball" />
+        <span className="ball" />
       </div>
     </StyledWrapper>
-  );
+  )
 }
 
 const StyledWrapper = styled.div`
-  .container {
-    width: 200px;
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-  }
-
   .loader {
+    text-align: center;
+    position: relative;
+    display: flex;
+  }
+
+  .loader .ball {
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+  }
+
+  .ball {
+    display: block;
     width: 20px;
-    height: 40px;
-    border-radius: 10px 50px;
-    box-shadow: 0px 0px 5px black;
-    animation: dominos 1s ease infinite;
+    height: 20px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 8px 5px, white 5%, black);
+    position: relative;
+    transform-origin: 50% -100px;
   }
 
-  .loader:nth-child(1) {
-    --left: 80px;
-    animation-delay: 0.325s;
-    background-color: #5d9960;
+  .ball:last-child {
+    animation: balance-right 1.2s infinite linear;
   }
 
-  .loader:nth-child(2) {
-    --left: 70px;
-    animation-delay: 0.5s;
-    background-color: #82a587;
+  .ball:first-child {
+    animation: balance-left 1.2s infinite linear;
   }
 
-  .loader:nth-child(3) {
-    left: 60px;
-    animation-delay: 0.625s;
-    background-color: #8bac74;
-  }
+  @keyframes balance-right {
+    0% {
+      transform: rotate(0deg);
+      animation-timing-function: linear;
+    }
 
-  .loader:nth-child(4) {
-    animation-delay: 0.74s;
-    left: 50px;
-    background-color: #b9bf90;
-  }
-
-  .loader:nth-child(5) {
-    animation-delay: 0.865s;
-    left: 40px;
-    background-color: #e7d2ab;
-  }
-
-  @keyframes dominos {
     50% {
-      opacity: 0.7;
+      transform: rotate(0deg);
+      animation-timing-function: ease-out;
     }
 
     75% {
-      -webkit-transform: rotate(90deg);
-      transform: rotate(90deg);
+      transform: rotate(-30deg);
+      animation-timing-function: ease-in;
+    }
+  }
+
+  @keyframes balance-left {
+    0% {
+      transform: rotate(0deg);
+      animation-timing-function: ease-out;
     }
 
-    80% {
-      opacity: 1;
+    25% {
+      transform: rotate(30deg);
+      animation-timing-function: ease-in;
     }
-  }`;
 
-export default LeafLoader;
+    50% {
+      transform: rotate(0deg);
+      animation-timing-function: linear;
+    }
+  }
+`
+
+export default LeafLoader

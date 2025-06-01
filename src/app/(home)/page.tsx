@@ -1,3 +1,4 @@
+import { BackgroundBeamsWithCollision } from '@/components/ui/collison-bean'
 import About from './section/about'
 import Contact from './section/contact'
 import Hero from './section/hero'
@@ -37,9 +38,11 @@ export default function Home() {
           id="projects"
           className="h-full min-h-screen bg-[var(--foreground)]"
         >
-          <Container>
-            <Projects />
-          </Container>
+          <BackgroundBeamsWithCollision className="to-[#e0ece4 h-full border-none bg-gradient-to-b from-[#f9f7f7]">
+            <Container>
+              <Projects />
+            </Container>
+          </BackgroundBeamsWithCollision>
         </section>
         <section id="contact" className="h-full">
           <Container>
