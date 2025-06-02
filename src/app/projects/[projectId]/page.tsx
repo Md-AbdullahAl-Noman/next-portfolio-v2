@@ -3,7 +3,6 @@ import { Container } from '@/components/ui/container'
 import ProjectContent from './components/content'
 
 import projects from '@/data/projects.json'
-import NavigationTab from '@/components/navigation/nav-tab'
 
 export default function ProjectPage({
   params,
@@ -24,9 +23,6 @@ export default function ProjectPage({
 
   return (
     <main className="h-full min-h-screen">
-      <Container>
-        <NavigationTab />
-      </Container>
       <Container>
         <ProjectContent data={project} />
       </Container>

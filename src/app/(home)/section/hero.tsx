@@ -8,7 +8,9 @@ import { Button } from '@/components/ui/button'
 import { socials } from '@/components/navigation/social'
 import { Link as ScrollLink } from 'react-scroll'
 import { FlipWords } from '@/components/flip-words'
-
+import { GiBugleCall } from 'react-icons/gi'
+import { PointerHighlight } from '@/components/ui/pointer'
+import StackLoader from '@/components/ui/stack'
 const Hero = () => {
   const firstName = [
     'M',
@@ -22,7 +24,8 @@ const Hero = () => {
     'l',
     'a',
     'h',
-    'a',
+    ' ',
+    'A',
     'l',
   ]
   const lastName = ['N', 'o', 'm', 'a', 'n']
@@ -156,9 +159,11 @@ const Hero = () => {
       <div className="flex flex-row space-x-4 pt-2">
         <motion.div variants={heroChildVariants}>
           <ScrollLink to="contact" smooth={true} duration={500} delay={200}>
-            <Button variant="outline">
-              <DocumentArrowDownIcon className="mr-2 size-4" />
-              Connect with me
+            <Button className="">
+              <div className="flex items-center justify-center">
+                <GiBugleCall className="mb-1 mr-2 size-4" />
+                Connect with me
+              </div>
             </Button>
           </ScrollLink>
         </motion.div>
@@ -168,12 +173,32 @@ const Hero = () => {
             target="_blank"
           >
             <Button>
-              <DocumentArrowDownIcon className="mr-2 size-4" />
-              Resume
+              <div className="flex items-center justify-center">
+                <DocumentArrowDownIcon className="mb-1 mr-2 size-4" />
+                Resume
+              </div>
             </Button>
           </Link>
         </motion.div>
       </div>
+      <motion.div variants={heroChildVariants} className="pt-16">
+        <PointerHighlight>
+          <FlipWords
+            className="rounded-r-lg border-l-4 border-cyan-400 bg-gray-800/20 p-4 pl-4 text-lg italic text-gray-400 backdrop-blur-sm"
+            words={[
+              'Turning complex problems into elegant solutions, one line of code at a time.',
+              'Transforming complex problems into elegant solutions, one line of code at a time.',
+              'Turning complexities into elegant solutions with every line of code.',
+            ]}
+            duration={3000}
+          />
+        </PointerHighlight>
+      </motion.div>
+
+      <div className="absolute top-[700px] left-[100px]">
+        <StackLoader />
+      </div>
+
       {/* SOCIAL BAR */}
       <motion.div
         variants={socialChildVariants}

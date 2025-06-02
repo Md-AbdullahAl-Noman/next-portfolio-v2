@@ -5,8 +5,11 @@ import { motion, Variants, useAnimation, useInView } from 'framer-motion'
 
 import { Heading } from '@/components/ui/heading'
 import { ProjectCard } from '@/components/ui/project-card'
-
+import { IoChevronBackCircle } from 'react-icons/io5'
 import projects from '@/data/projects.json'
+import ChevronLeftIcon from '@heroicons/react/24/solid/ChevronLeftIcon'
+import Button from '@/components/ui/button'
+import Link from 'next/link'
 
 const ProjectContent = () => {
   const ref = useRef(null)
@@ -55,7 +58,14 @@ const ProjectContent = () => {
       animate={controls}
       className="flex flex-col items-center justify-center space-y-16 py-16"
     >
-      <Heading heading="Projects" />
+      <div className="flex w-full items-center gap-64 ">
+        <Link href="/">
+          <Button className="space-x-4 text-sm ">
+            <IoChevronBackCircle className="mb-1 mr-2 size-8" />
+          </Button>
+        </Link>
+        <Heading heading="Projects" />
+      </div>
       <motion.div
         variants={projectChildVariants}
         className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3"

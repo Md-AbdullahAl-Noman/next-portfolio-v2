@@ -77,7 +77,9 @@ const ContactForm = () => {
         className={`${errors.message ? 'border-red-500 placeholder-red-400' : ''} h-full max-h-[250px] min-h-[100px] w-full border-b-2 border-[var(--primary)] bg-transparent py-2 text-[var(--background)] caret-[var(--primary)] outline-none transition-colors duration-500 ease-linear focus:border-[var(--accent)]`}
       />
       <Button className="mt-4" type="submit">
-        Send <PaperAirplaneIcon className="ml-2 size-4" />
+        <div className=" flex items-center justify-center">
+          Send <PaperAirplaneIcon className="mb-1 ml-2 size-4" />
+        </div>
       </Button>
     </form>
   )

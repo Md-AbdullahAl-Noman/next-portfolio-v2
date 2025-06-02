@@ -71,61 +71,59 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   }
 
   return (
-    <>
-      <Link href={`/projects/${id}`}>
-        <motion.div
-          ref={ref}
-          variants={projectCardVariants}
-          initial="hidden"
-          animate={controls}
-          className="group cursor-pointer space-y-4 rounded-lg border-2 border-[var(--foreground-muted)] p-4 shadow-lg transition duration-500 ease-out hover:border-[var(--primary)]"
-        >
-          <motion.div className="relative aspect-video h-auto w-auto rounded bg-[var(--foreground-muted)]">
-            <Image
-              src={`/projects/${img}`}
-              alt={`${name} image`}
-              fill
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 60vw, 40vw"
-              className="aspect-video object-contain"
-            />
-            <motion.div
-              variants={projectCardImageVariants}
-              className="absolute h-full w-full bg-[var(--foreground)]"
-            />
-          </motion.div>
-          <motion.div className="space-y-4">
-            <motion.div
-              variants={projectCardChildVariants}
-              className="flex items-center justify-between"
-            >
-              <div className="whitespace-nowrap text-xl font-bold">
-                {name.length > 20 ? name.slice(0, 20) + '...' : name}
-              </div>
-              <span className="arrow">
-                <ArrowRightIcon className="social size-6 transform duration-300 ease-out will-change-transform group-hover:-rotate-45 group-hover:scale-90 group-hover:text-[var(--foreground)]" />
-              </span>
-            </motion.div>
-            <motion.div variants={projectCardChildVariants}>
-              {description.length > 70
-                ? `${description.slice(0, 70)}...`
-                : description}
-            </motion.div>
-            <motion.ul
-              variants={projectCardChildVariants}
-              className="scrollbar flex space-x-2 overflow-x-auto"
-            >
-              {techstack.map((tech) => (
-                <li
-                  key={tech}
-                  className="mb-4 whitespace-nowrap rounded-md border border-[var(--primary)] px-2 py-1 text-xs text-[var(--primary)]"
-                >
-                  {tech}
-                </li>
-              ))}
-            </motion.ul>
-          </motion.div>
+    <Link href={`/projects/${id}`}>
+      <motion.div
+        ref={ref}
+        variants={projectCardVariants}
+        initial="hidden"
+        animate={controls}
+        className="group cursor-pointer space-y-4 rounded-lg border-2 border-[var(--foreground-muted)] p-4 shadow-lg transition duration-500 ease-out hover:border-[var(--primary)]"
+      >
+        <motion.div className="relative aspect-video h-auto w-auto rounded bg-[var(--foreground-muted)]">
+          <Image
+            src={`${img}`}
+            alt={`${name} image`}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 60vw, 40vw"
+            className="aspect-video object-contain"
+          />
+          <motion.div
+            variants={projectCardImageVariants}
+            className="absolute h-full w-full bg-[var(--foreground)]"
+          />
         </motion.div>
-      </Link>
-    </>
+        <motion.div className="space-y-4">
+          <motion.div
+            variants={projectCardChildVariants}
+            className="flex items-center justify-between"
+          >
+            <div className="whitespace-nowrap text-xl font-bold">
+              {name.length > 20 ? name.slice(0, 20) + '...' : name}
+            </div>
+            <span className="arrow">
+              <ArrowRightIcon className="social size-6 transform duration-300 ease-out will-change-transform group-hover:-rotate-45 group-hover:scale-90 group-hover:text-[var(--foreground)]" />
+            </span>
+          </motion.div>
+          <motion.div variants={projectCardChildVariants}>
+            {description.length > 70
+              ? `${description.slice(0, 70)}...`
+              : description}
+          </motion.div>
+          <motion.ul
+            variants={projectCardChildVariants}
+            className="scrollbar flex space-x-2 overflow-x-auto"
+          >
+            {techstack.map((tech) => (
+              <li
+                key={tech}
+                className="mb-4 whitespace-nowrap rounded-md border border-[var(--primary)] px-2 py-1 text-xs text-[var(--primary)]"
+              >
+                {tech}
+              </li>
+            ))}
+          </motion.ul>
+        </motion.div>
+      </motion.div>
+    </Link>
   )
 }

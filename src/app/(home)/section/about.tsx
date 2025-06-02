@@ -180,17 +180,6 @@ const ProfileContent = () => {
           challenges.
         </motion.div>
       </div>
-      <motion.div variants={profileContentChildVariants}>
-        <Link
-          href="https://www.linkedin.com/in/abdullah-al-noman-se/details/certifications/"
-          target="_blank"
-        >
-          <Button>
-            Certificates
-            <ArrowTopRightOnSquareIcon className="ml-2 size-4" />
-          </Button>
-        </Link>
-      </motion.div>
     </motion.div>
   )
 }

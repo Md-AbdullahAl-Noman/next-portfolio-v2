@@ -7,9 +7,6 @@ export default function ProjectPage() {
   return (
     <main className="h-full min-h-screen">
       <Container>
-        <NavigationTab />
-      </Container>
-      <Container>
         <ProjectContent />
       </Container>
     </main>

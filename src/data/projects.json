@@ -7,8 +7,8 @@
     "techstack": ["Next.js", "React", "TypeScript", "Tailwind CSS", "MySQL"],
     "featured": true,
     "links": {
-      "github": "your-github-link",
-      "live": "your-live-link"
+      "github": "https://github.com/Md-AbdullahAl-Noman",
+      "live": "https://autoworx.tech/"
     },
     "figma_link": "your-figma-link"
   }

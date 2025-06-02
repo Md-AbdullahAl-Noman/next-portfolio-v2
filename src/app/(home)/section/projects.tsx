@@ -1,13 +1,13 @@
 'use client'
 
+import { ArrowRightIcon } from '@heroicons/react/24/solid'
+import { motion, useAnimation, useInView, Variants } from 'framer-motion'
 import Link from 'next/link'
 import { useEffect, useRef } from 'react'
-import { ArrowLongRightIcon } from '@heroicons/react/24/solid'
-import { motion, Variants, useAnimation, useInView } from 'framer-motion'
 
+import { Button } from '@/components/ui/button'
 import { Heading } from '@/components/ui/heading'
 import { ProjectCard } from '@/components/ui/project-card'
-import { Button } from '@/components/ui/button'
 
 import projects from '@/data/projects.json'
 
@@ -81,8 +81,10 @@ const Projects = () => {
       <motion.div variants={projectChildVariants}>
         <Link href="/projects">
           <Button>
-            View All Projects
-            <ArrowLongRightIcon className="ml-2 size-6" />
+            <div className="flex items-center justify-center gap-2">
+              View All Projects
+              <ArrowRightIcon className="social mb-1 size-6 transform duration-300 ease-out will-change-transform group-hover:-rotate-45 group-hover:scale-90 group-hover:text-[var(--foreground)]" />
+            </div>
           </Button>
         </Link>
       </motion.div>

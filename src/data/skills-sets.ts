@@ -31,6 +31,7 @@ import {
   SiTailwindcss,
   SiTypescript,
   SiVercel,
+  SiNestjs,
 } from '@icons-pack/react-simple-icons'
 
 export const skills = [
@@ -62,7 +63,7 @@ export const skills = [
   {
     name: 'SQL',
     category: 'languages',
-    icon: null,
+    icon: SiMysql,
   },
   {
     name: 'React JS',
@@ -88,6 +89,11 @@ export const skills = [
     name: 'Figma',
     category: 'frontend',
     icon: SiFigma,
+  },
+  {
+    name: 'Nest JS',
+    category: 'backend',
+    icon: SiNestjs,
   },
   {
     name: 'Node JS',

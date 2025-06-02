@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import { FaLink } from 'react-icons/fa'
 
 import { SiGithub } from '@icons-pack/react-simple-icons'
 import { ChevronLeftIcon } from '@heroicons/react/24/solid'
@@ -28,8 +29,10 @@ const ProjectContent: React.FC<ProjectContentProps> = ({ data }) => {
         <div className="text-2xl font-semibold uppercase">{data.name}</div>
         <Link href="/projects">
           <Button className="space-x-4 text-sm">
-            <ChevronLeftIcon className="mr-2 size-4" />
-            <span className="hidden lg:block">Back to projects</span>
+            <div className="flex items-center justify-center">
+              <ChevronLeftIcon className="mb-1 mr-2 size-4" />
+              <span className="hidden lg:block">Back to projects</span>
+            </div>
           </Button>
         </Link>
       </div>
@@ -40,7 +43,7 @@ const ProjectContent: React.FC<ProjectContentProps> = ({ data }) => {
           className="h-full w-full rounded-md"
         /> */}
         <Image
-          src={`/projects/${data.img}`}
+          src={`${data.img}`}
           alt={data.name + ' Image'}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 60vw"
@@ -66,14 +69,18 @@ const ProjectContent: React.FC<ProjectContentProps> = ({ data }) => {
       <div className="flex space-x-4">
         <Link href={data.links.live}>
           <Button variant="outline">
-            <SiGithub className="mr-2 size-4" />
-            Live Demo
+            <div className="flex items-center justify-center">
+              <FaLink className="mr-2 size-4" />
+              Live Demo
+            </div>
           </Button>
         </Link>
         <Link href={data.links.github}>
           <Button>
-            <SiGithub className="mr-2 size-4" />
-            Source Code
+            <div className="flex items-center justify-center">
+              <SiGithub className="mr-2 size-4" />
+              Source Code
+            </div>
           </Button>
         </Link>
       </div>
