@@ -7,6 +7,7 @@ import { Link as ScrollLink } from 'react-scroll'
 
 import { socials } from './social'
 import LeafLoader from '../leaf'
+import BoxComponent from '../ui/box'
 
 const Footer = () => {
   const pathname = usePathname()
@@ -17,15 +18,7 @@ const Footer = () => {
   return (
     <footer className="flex h-[300px] flex-col items-center justify-center space-y-8 border-t border-[var(--foreground)] py-20">
       <div className="cursor-pointer">
-        {isHomePage ? (
-          <ScrollLink to="hero" smooth={true} duration={500} delay={200}>
-            <Image src="/noman_circle.png" alt="logo" width={48} height={48} />
-          </ScrollLink>
-        ) : (
-          <Link href="/">
-            <Image src="/noman_circle.png" alt="logo" width={28} height={28} />
-          </Link>
-        )}
+        <BoxComponent />
       </div>
       <div className="flex flex-row space-x-6">
         {socials.map((social) => (

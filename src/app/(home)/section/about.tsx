@@ -47,6 +47,10 @@ const About = () => {
         <ProfileImage />
         <ProfileContent />
       </div>
+      {/* Yellow Borders */}
+
+      <div className="animate-typewriter absolute left-0 right-0 top-[748px] h-3 bg-yellow-500"></div>
+      <div className="absolute bottom-0 right-0 top-[748px]  w-3 rounded-xl bg-yellow-500"></div>
       <Experience />
     </motion.div>
   )
@@ -218,7 +222,7 @@ const Experience = () => {
     <div className="min-h-screen px-4 py-16">
       <div className="mx-auto max-w-3xl">
         <div className="relative mt-12" ref={timelineRef}>
-          <div className="absolute left-1/2 h-full w-1 -translate-x-1/2 transform bg-gray-700">
+          <div className="absolute left-1/2 h-full w-1 -translate-x-1/2 transform rounded-xl  bg-gray-700">
             <div className="timeline-progress"></div>
           </div>
           <div className="space-y-16">

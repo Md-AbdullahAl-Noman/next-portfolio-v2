@@ -1,16 +1,16 @@
 'use client'
 
-import Link from 'next/link'
-import { motion, type Variants } from 'framer-motion'
 import { DocumentArrowDownIcon } from '@heroicons/react/24/solid'
+import { motion, type Variants } from 'framer-motion'
+import Link from 'next/link'
 
-import { Button } from '@/components/ui/button'
-import { socials } from '@/components/navigation/social'
-import { Link as ScrollLink } from 'react-scroll'
 import { FlipWords } from '@/components/flip-words'
-import { GiBugleCall } from 'react-icons/gi'
+import { Button } from '@/components/ui/button'
 import { PointerHighlight } from '@/components/ui/pointer'
+import SideAnimation from '@/components/ui/side-circle'
 import StackLoader from '@/components/ui/stack'
+import { GiBugleCall } from 'react-icons/gi'
+import { Link as ScrollLink } from 'react-scroll'
 const Hero = () => {
   const firstName = [
     'M',
@@ -195,20 +195,19 @@ const Hero = () => {
         </PointerHighlight>
       </motion.div>
 
-      <div className="absolute top-[700px] left-[100px]">
-        <StackLoader />
-      </div>
+     
 
       {/* SOCIAL BAR */}
       <motion.div
         variants={socialChildVariants}
-        className="absolute right-8 hidden flex-col space-y-4 sm:flex 2xl:space-y-6"
+        className="absolute right-12 hidden flex-col space-y-4 sm:flex 2xl:space-y-6"
       >
-        {socials.map((social) => (
+        {/* {socials.map((social) => (
           <span key={social.name} className="social">
             <Link href={social.href}>{social.icon}</Link>
           </span>
-        ))}
+        ))} */}
+        <SideAnimation />
       </motion.div>
     </motion.div>
   )

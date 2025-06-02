@@ -7,6 +7,7 @@ import { motion, Variants, useAnimation, useInView } from 'framer-motion'
 
 import ContactForm from '@/components/contact-form'
 import { Heading } from '@/components/ui/heading'
+import StackLoader from '@/components/ui/stack'
 
 const Contact = () => {
   const ref = useRef(null)
@@ -55,6 +56,10 @@ const Contact = () => {
         <motion.div variants={contactVariants}>
           <ContactForm />
         </motion.div>
+
+        <div className="absolute right-[200px] top-[200px]">
+          <StackLoader />
+        </div>
       </div>
     </motion.div>
   )

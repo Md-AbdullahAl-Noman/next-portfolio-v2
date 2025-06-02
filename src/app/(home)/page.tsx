@@ -25,6 +25,7 @@ export default function Home() {
       </div>
       <div className="to-[#e0ece4 bg-gradient-to-b from-[#f9f7f7] text-[var(--background)]">
         <section id="about" className="h-full min-h-screen ">
+          
           <Container>
             <About />
           </Container>
