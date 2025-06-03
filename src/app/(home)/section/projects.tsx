@@ -10,6 +10,7 @@ import { Heading } from '@/components/ui/heading'
 import { ProjectCard } from '@/components/ui/project-card'
 
 import projects from '@/data/projects.json'
+import TitleBar from '@/components/ui/title'
 
 const Projects = () => {
   const ref = useRef(null)
@@ -62,7 +63,11 @@ const Projects = () => {
       animate={controls}
       className="flex flex-col items-center justify-center space-y-16 py-16"
     >
-      <Heading heading="Featured Projects" />
+      <div className="flex w-full items-start justify-center">
+        <div className="  ml-16 w-[400px] rounded-r-md bg-gray-200">
+          <TitleBar text="Projects" strokeColor='black'/>
+        </div>
+      </div>
       <motion.div
         variants={projectChildVariants}
         className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3"

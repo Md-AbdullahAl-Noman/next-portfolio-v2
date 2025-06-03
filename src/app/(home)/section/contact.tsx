@@ -8,6 +8,7 @@ import { motion, Variants, useAnimation, useInView } from 'framer-motion'
 import ContactForm from '@/components/contact-form'
 import { Heading } from '@/components/ui/heading'
 import StackLoader from '@/components/ui/stack'
+import TitleBar from '@/components/ui/title'
 
 const Contact = () => {
   const ref = useRef(null)
@@ -52,7 +53,11 @@ const Contact = () => {
         />
       </div>
       <div className="flex w-full flex-col items-center justify-center space-y-12 bg-[var(--foreground)]">
-        <Heading heading="Contact Me" />
+        <div className="flex w-full items-start justify-center">
+          <div className="  ml-16 w-[400px] rounded-r-md bg-gray-200">
+            <TitleBar text="Contact" strokeColor='black'/>
+          </div>
+        </div>
         <motion.div variants={contactVariants}>
           <ContactForm />
         </motion.div>

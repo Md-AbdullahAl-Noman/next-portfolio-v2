@@ -14,6 +14,7 @@ import { Heading } from '@/components/ui/heading'
 
 import { skills } from '@/data/skills-sets'
 import { BackgroundGradient } from '@/components/ui/bg-gradient'
+import TitleBar from '@/components/ui/title'
 
 interface ISkillSets {
   name: string
@@ -85,7 +86,11 @@ const Skills = () => {
       animate={controls}
       className="space-y-16 py-16"
     >
-      <Heading heading="Skills & Technologies" />
+      <div className="flex w-full items-start justify-center">
+        <div className=" ml-16 w-[400px] rounded-r-md bg-gray-200">
+          <TitleBar text="Skills" strokeColor="black" />
+        </div>
+      </div>
       {/* TABS */}
       <div className="flex flex-wrap justify-center gap-4">
         {tab.map((item) => (

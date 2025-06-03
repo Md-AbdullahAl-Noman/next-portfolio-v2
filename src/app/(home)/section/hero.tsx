@@ -11,6 +11,7 @@ import SideAnimation from '@/components/ui/side-circle'
 import StackLoader from '@/components/ui/stack'
 import { GiBugleCall } from 'react-icons/gi'
 import { Link as ScrollLink } from 'react-scroll'
+import CodeCard from '@/components/ui/code'
 const Hero = () => {
   const firstName = [
     'M',
@@ -195,18 +196,17 @@ const Hero = () => {
         </PointerHighlight>
       </motion.div>
 
-     
-
       {/* SOCIAL BAR */}
+      <motion.div
+        variants={socialChildVariants}
+        className="absolute right-[400px] top-[800px] hidden flex-col space-y-4 sm:flex 2xl:space-y-6"
+      >
+        <CodeCard />
+      </motion.div>
       <motion.div
         variants={socialChildVariants}
         className="absolute right-12 hidden flex-col space-y-4 sm:flex 2xl:space-y-6"
       >
-        {/* {socials.map((social) => (
-          <span key={social.name} className="social">
-            <Link href={social.href}>{social.icon}</Link>
-          </span>
-        ))} */}
         <SideAnimation />
       </motion.div>
     </motion.div>

@@ -1,13 +1,12 @@
 'use client'
 
-import Link from 'next/link'
+import { motion, useAnimation, useInView, Variants } from 'framer-motion'
 import Image from 'next/image'
 import { useEffect, useRef } from 'react'
-import { motion, Variants, useAnimation, useInView } from 'framer-motion'
-import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/solid'
 
 import { Heading } from '@/components/ui/heading'
-import { Button } from '@/components/ui/button'
+import Linemaker from '@/components/ui/line'
+import TitleBar from '@/components/ui/title'
 
 interface TimelineItem {
   year: string
@@ -19,7 +18,7 @@ interface TimelineItem {
 const timelineData: TimelineItem[] = [
   {
     year: '2025',
-    title: 'Senior Software Engineer',
+    title: 'Senior Software Engineer @ Autoworx',
     description:
       'Led multiple successful projects and mentored junior developers',
     icon: '/business-development.gif',
@@ -42,15 +41,28 @@ const timelineData: TimelineItem[] = [
 const About = () => {
   return (
     <motion.div className="space-y-16 py-16">
-      <Heading heading="About Me" />
+      <div className="flex w-full items-start justify-center">
+        <div className="  ml-16 w-[400px] rounded-r-md bg-gray-200">
+          <TitleBar text="About" strokeColor='black' />
+        </div>
+      </div>
       <div className="grid h-full w-full grid-cols-1 gap-8 sm:gap-12 md:grid-cols-2">
         <ProfileImage />
         <ProfileContent />
       </div>
       {/* Yellow Borders */}
 
-      <div className="animate-typewriter absolute left-0 right-0 top-[748px] h-3 bg-yellow-500"></div>
-      <div className="absolute bottom-0 right-0 top-[748px]  w-3 rounded-xl bg-yellow-500"></div>
+      {/* <div className="animate-typewriter absolute left-0 right-0 top-[748px] h-3 bg-yellow-500"></div> */}
+      <div className="absolute  top-[762px] h-3 w-3 rounded-xl ">
+        <Linemaker direction="horizontal" width="1810px" />
+      </div>
+      {/* <div className="absolute bottom-0 right-0 top-[748px]  w-3 rounded-xl bg-yellow-500"></div> */}
+      <div className="absolute bottom-0 right-0 top-[762px]  w-3 rounded-xl">
+        <Linemaker direction="vertical" height="730px" width="6px" />
+      </div>
+      <div className="absolute left-[100px] top-[1508px] h-3 w-3 rounded-xl ">
+        <Linemaker direction="horizontal" width="2430px" />
+      </div>
       <Experience />
     </motion.div>
   )
@@ -222,8 +234,8 @@ const Experience = () => {
     <div className="min-h-screen px-4 py-16">
       <div className="mx-auto max-w-3xl">
         <div className="relative mt-12" ref={timelineRef}>
-          <div className="absolute left-1/2 h-full w-1 -translate-x-1/2 transform rounded-xl  bg-gray-700">
-            <div className="timeline-progress"></div>
+          <div className="absolute left-1/2 h-full w-1 -translate-x-1/2 transform ">
+            <Linemaker direction="vertical" height="740px" width="6px" />
           </div>
           <div className="space-y-16">
             {timelineData.map((item, index) => (

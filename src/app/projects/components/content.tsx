@@ -10,6 +10,7 @@ import projects from '@/data/projects.json'
 import ChevronLeftIcon from '@heroicons/react/24/solid/ChevronLeftIcon'
 import Button from '@/components/ui/button'
 import Link from 'next/link'
+import TitleBar from '@/components/ui/title'
 
 const ProjectContent = () => {
   const ref = useRef(null)
@@ -64,7 +65,11 @@ const ProjectContent = () => {
             <IoChevronBackCircle className="mb-1 mr-2 size-8" />
           </Button>
         </Link>
-        <Heading heading="Projects" />
+        <div className="flex w-full items-start justify-center">
+        <div className="  ml-16 w-[400px] rounded-r-md ">
+          <TitleBar text="Projects" />
+        </div>
+      </div>
       </div>
       <motion.div
         variants={projectChildVariants}
