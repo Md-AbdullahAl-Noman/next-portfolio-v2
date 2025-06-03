@@ -45,7 +45,7 @@ const Contact = () => {
       <div className="relative mr-28 hidden aspect-square h-full w-full md:flex">
         <Image
           src="/pair-programming.png"
-          alt="room"
+          alt="contact"
           width={1920}
           height={1080}
           priority
@@ -55,7 +55,7 @@ const Contact = () => {
       <div className="flex w-full flex-col items-center justify-center space-y-12 bg-[var(--foreground)]">
         <div className="flex w-full items-start justify-center">
           <div className="  ml-16 w-[400px] rounded-r-md bg-gray-200">
-            <TitleBar text="Contact" strokeColor='black'/>
+            <TitleBar text="Contact" strokeColor="black" />
           </div>
         </div>
         <motion.div variants={contactVariants}>

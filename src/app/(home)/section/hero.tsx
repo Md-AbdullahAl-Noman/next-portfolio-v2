@@ -199,13 +199,13 @@ const Hero = () => {
       {/* SOCIAL BAR */}
       <motion.div
         variants={socialChildVariants}
-        className="absolute right-[400px] top-[800px] hidden flex-col space-y-4 sm:flex 2xl:space-y-6"
+        className="absolute right-[400px] top-[70vh] hidden flex-col space-y-4 sm:flex 2xl:space-y-6 sm:right[50%]"
       >
         <CodeCard />
       </motion.div>
       <motion.div
         variants={socialChildVariants}
-        className="absolute right-12 hidden flex-col space-y-4 sm:flex 2xl:space-y-6"
+        className="absolute right-12  hidden flex-col space-y-4 sm:flex 2xl:space-y-6"
       >
         <SideAnimation />
       </motion.div>

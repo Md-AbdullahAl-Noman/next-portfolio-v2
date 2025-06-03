@@ -43,27 +43,30 @@ const About = () => {
     <motion.div className="space-y-16 py-16">
       <div className="flex w-full items-start justify-center">
         <div className="  ml-16 w-[400px] rounded-r-md bg-gray-200">
-          <TitleBar text="About" strokeColor='black' />
+          <TitleBar text="About" strokeColor="black" />
         </div>
       </div>
       <div className="grid h-full w-full grid-cols-1 gap-8 sm:gap-12 md:grid-cols-2">
         <ProfileImage />
         <ProfileContent />
       </div>
+
       {/* Yellow Borders */}
 
-      {/* <div className="animate-typewriter absolute left-0 right-0 top-[748px] h-3 bg-yellow-500"></div> */}
-      <div className="absolute  top-[762px] h-3 w-3 rounded-xl ">
+      <div className="absolute top-[762px] hidden h-3 w-3 rounded-xl md:block">
         <Linemaker direction="horizontal" width="1810px" />
       </div>
-      {/* <div className="absolute bottom-0 right-0 top-[748px]  w-3 rounded-xl bg-yellow-500"></div> */}
-      <div className="absolute bottom-0 right-0 top-[762px]  w-3 rounded-xl">
+
+      <div className="absolute bottom-0 right-0 top-[762px] hidden w-3 rounded-xl md:block">
         <Linemaker direction="vertical" height="730px" width="6px" />
       </div>
-      <div className="absolute left-[100px] top-[1508px] h-3 w-3 rounded-xl ">
+
+      <div className="absolute left-[100px] top-[1508px] hidden h-3 w-3 rounded-xl md:block">
         <Linemaker direction="horizontal" width="2430px" />
       </div>
-      <Experience />
+      <div className="hidden md:block">
+        <Experience />
+      </div>
     </motion.div>
   )
 }
@@ -233,11 +236,14 @@ const Experience = () => {
   return (
     <div className="min-h-screen px-4 py-16">
       <div className="mx-auto max-w-3xl">
+        {/* Timeline Line - Hidden on small screens */}
         <div className="relative mt-12" ref={timelineRef}>
-          <div className="absolute left-1/2 h-full w-1 -translate-x-1/2 transform ">
+          <div className="absolute left-1/2 hidden h-full w-1 -translate-x-1/2 transform md:block">
             <Linemaker direction="vertical" height="740px" width="6px" />
           </div>
-          <div className="space-y-16">
+
+          {/* Mobile-optimized timeline */}
+          <div className="space-y-8 md:space-y-16">
             {timelineData.map((item, index) => (
               <div
                 key={index}
@@ -245,8 +251,9 @@ const Experience = () => {
                   index % 2 === 0 ? 'left-item' : 'right-item'
                 }`}
               >
+                {/* For medium screens and up - Side by side layout */}
                 <div
-                  className={`flex items-center ${
+                  className={`hidden items-center md:flex ${
                     index % 2 === 0 ? 'justify-end' : 'justify-start'
                   }`}
                 >
@@ -271,12 +278,40 @@ const Experience = () => {
                         <Image
                           src={item.icon}
                           alt={item.title}
-                          className=" rounded-full bg-black"
+                          className="rounded-full bg-black"
                           width={42}
                           height={42}
                         />
                       )}
                     </div>
+                  </div>
+                </div>
+
+                {/* For small screens - Stacked layout */}
+                <div className="block md:hidden">
+                  <div className="mb-3 flex items-center space-x-4">
+                    <div className="rounded-full bg-gray-600 px-2 py-2 shadow-lg">
+                      {item.icon && (
+                        <Image
+                          src={item.icon}
+                          alt={item.title}
+                          className="rounded-full bg-black"
+                          width={32}
+                          height={32}
+                        />
+                      )}
+                    </div>
+                    <span className="font-semibold text-emerald-400">
+                      {item.year}
+                    </span>
+                  </div>
+                  <div className="rounded-lg bg-gray-800 p-4 shadow-xl">
+                    <h3 className="text-lg font-bold text-white">
+                      {item.title}
+                    </h3>
+                    <p className="mt-2 text-sm text-gray-400">
+                      {item.description}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -287,5 +322,4 @@ const Experience = () => {
     </div>
   )
 }
-
 export default About
