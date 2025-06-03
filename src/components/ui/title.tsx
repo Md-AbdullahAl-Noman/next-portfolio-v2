@@ -8,7 +8,7 @@ interface TitleBarProps {
 }
 
 const TitleBar: React.FC<TitleBarProps> = ({
-  text = 'uiverse',
+  text = '',
   hoverColor = '#00ccbf',
   strokeColor = 'rgba(255, 255, 255, 0.6)',
 }) => {

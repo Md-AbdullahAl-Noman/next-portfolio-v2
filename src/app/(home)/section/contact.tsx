@@ -54,7 +54,7 @@ const Contact = () => {
       </div>
       <div className="flex w-full flex-col items-center justify-center space-y-12 bg-[var(--foreground)]">
         <div className="flex w-full items-start justify-center">
-          <div className="  ml-16 w-[400px] rounded-r-md bg-gray-200">
+          <div className=" ml:14 w-[300px] rounded-r-md bg-gray-200 md:ml-16">
             <TitleBar text="Contact" strokeColor="black" />
           </div>
         </div>
@@ -62,7 +62,7 @@ const Contact = () => {
           <ContactForm />
         </motion.div>
 
-        <div className="absolute right-[200px] top-[200px]">
+        <div className="absolute right-[200px] top-[200px] hidden md:block">
           <StackLoader />
         </div>
       </div>

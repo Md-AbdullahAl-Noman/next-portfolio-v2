@@ -64,8 +64,8 @@ const Projects = () => {
       className="flex flex-col items-center justify-center space-y-16 py-16"
     >
       <div className="flex w-full items-start justify-center">
-        <div className="  ml-16 w-[400px] rounded-r-md bg-gray-200">
-          <TitleBar text="Projects" strokeColor='black'/>
+        <div className="  ml-14 w-[300px] rounded-r-md bg-gray-200 md:ml-16">
+          <TitleBar text="Projects" strokeColor="black" />
         </div>
       </div>
       <motion.div
