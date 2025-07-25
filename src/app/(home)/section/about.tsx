@@ -53,15 +53,15 @@ const About = () => {
 
       {/* Yellow Borders */}
 
-      <div className="absolute top-[762px] hidden h-3 w-3 rounded-xl md:block">
+      <div className="absolute top-[744px] hidden h-3 w-3 rounded-xl md:block">
         <Linemaker direction="horizontal" width="1810px" />
       </div>
 
-      <div className="absolute bottom-0 right-0 top-[762px] hidden w-3 rounded-xl md:block">
-        <Linemaker direction="vertical" height="730px" width="6px" />
+      <div className="absolute bottom-0 right-0 top-[744px] hidden w-3 rounded-xl md:block">
+        <Linemaker direction="vertical" height="738px" width="6px" />
       </div>
 
-      <div className="absolute left-[100px] top-[1508px] hidden h-3 w-3 rounded-xl md:block">
+      <div className="absolute left-[100px] top-[1482px] hidden h-3 w-3 rounded-xl md:block">
         <Linemaker direction="horizontal" width="2430px" />
       </div>
       <div className="hidden md:block">

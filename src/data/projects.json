@@ -2,7 +2,7 @@
   {
     "id": "autoworx",
     "name": "AutoWorx",
-    "description": "A comprehensive web application for the automation industry that handles automated product listings, lead management, employee-client interactions, and appointment scheduling. Built with Next.js, React, TypeScript, Tailwind, and MySQL.",
+    "description": "A comprehensive CRM platform for the automation industry that handles automated product listings, lead management, employee-client interactions, and appointment scheduling. Built with Next.js, React, TypeScript, Tailwind, and MySQL.",
     "img": "/projects/autoworx.png",
     "techstack": ["Next.js", "React", "TypeScript", "Tailwind CSS", "MySQL"],
     "featured": true,
@@ -11,5 +11,41 @@
       "live": "https://autoworx.tech/"
     },
     "figma_link": "your-figma-link"
+  },
+  {
+    "id": "automation-backend",
+    "name": "Automation Backend",
+    "description": "A robust backend platform built with NestJS, MySQL, and Prisma, designed for automating multiple modules and workflows. Utilizes BullMQ and Redis for efficient job scheduling and queue management, enabling automation triggers based on user-defined times and conditions, with flexible targeting of destination systems.",
+    "img": "/projects/automation.png",
+    "techstack": ["NestJS", "MySQL", "Prisma", "BullMQ", "Redis"],
+    "featured": true,
+    "links": {
+      "github": "https://github.com/Md-AbdullahAl-Noman/autoworx-backend",
+      "live": "https://api.autoworx.tech/api-docs"
+    }
+  },
+  {
+    "id": "luminar-technology",
+    "name": "Luminar Technology",
+    "description": "A modern website for a software company, built with Next.js and Tailwind CSS. Features custom animations and interactive UI components to showcase services and projects.",
+    "img": "/projects/luminar.png",
+    "techstack": ["Next.js", "Tailwind CSS", "Custom Animations"],
+    "featured": true,
+    "links": {
+      "github": "https://github.com/Md-AbdullahAl-Noman/luminartechnology",
+      "live": "https://www.luminartechnology.com/"
+    }
+  },
+  {
+    "id": "menu-app",
+    "name": "Menu App",
+    "description": "A digital restaurant menu application developed for a Saudi client. Built with React and Firebase, it allows customers to browse dishes, view details, and place orders online. Designed for ease of use and optimized for mobile devices.",
+    "img": "/projects/menuapp.png",
+    "techstack": ["React", "Firebase"],
+    "featured": false,
+    "links": {
+      "live": "https://menu.lamsatalbaharat.com/",
+      "github": "https://github.com/Md-AbdullahAl-Noman/menuapp-react"
+    }
   }
 ]

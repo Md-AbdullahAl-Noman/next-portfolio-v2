@@ -53,18 +53,14 @@ const Contact = () => {
         />
       </div>
       <div className="flex w-full flex-col items-center justify-center space-y-12 bg-[var(--foreground)]">
-        <div className="flex w-full items-start justify-center">
-          <div className=" ml:14 w-[300px] rounded-r-md bg-gray-200 md:ml-16">
+        <div className="flex w-full items-start justify-start">
+          <div className="w-[300px] -mt-6 ml-4 rounded-r-md bg-gray-200 md:ml-8">
             <TitleBar text="Contact" strokeColor="black" />
           </div>
         </div>
         <motion.div variants={contactVariants}>
           <ContactForm />
         </motion.div>
-
-        <div className="absolute right-[200px] top-[200px] hidden md:block">
-          <StackLoader />
-        </div>
       </div>
     </motion.div>
   )

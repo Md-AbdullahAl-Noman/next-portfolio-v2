@@ -16,7 +16,7 @@ export default function Home() {
       <NavigationTab />
       <BackgroundParticles />
 
-      <div className=" h-full min-h-screen rounded-b-[100px] border-b bg-[#121212]">
+      <div className=" h-full min-h-screen rounded-b-[30px] sm:rounded-b-[50px] md:rounded-b-[100px] border-b bg-[#121212]">
         <section id="hero">
           <Container>
             <Hero />
@@ -51,7 +51,7 @@ export default function Home() {
           </Container>
         </section>
       </div>
-      <div className=" w-full rounded-t-[100px] border-t bg-[#121212]">
+      <div className=" w-full rounded-t-[30px] sm:rounded-t-[50px] md:rounded-t-[100px] border-t bg-[#121212]">
         <Footer />
       </div>
     </main>

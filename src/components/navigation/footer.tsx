@@ -16,8 +16,8 @@ const Footer = () => {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="flex h-[300px] flex-col items-center justify-center space-y-8 border-t border-[var(--foreground)] py-20">
-      <div className="cursor-pointer">
+    <footer className="relative flex h-[350px] flex-col items-center justify-center space-y-4 border-t border-[var(--foreground)] py-20">
+      <div className="cursor-pointer ">
         <BoxComponent />
       </div>
       <div className="flex flex-row space-x-6">
@@ -29,11 +29,13 @@ const Footer = () => {
             <Link href={social.href}>{social.name}</Link>
           </div>
         ))}
-      </div>
-      <div className="text-medium text-neutral-400">
+      </div> 
+      <div className="text-medium text-neutral-400 mb-8" >
         © {currentYear} • Md Abdullah Al Noman • All Rights Reserved.
       </div>
-      <LeafLoader />
+      <div className='absolute bottom-0 left-0 right-0 flex justify-center'>
+        <LeafLoader />
+      </div>
     </footer>
   )
 }

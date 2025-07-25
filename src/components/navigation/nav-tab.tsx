@@ -60,10 +60,21 @@ const StyledWrapper = styled.div`
   z-index: 1000;
   display: flex;
   justify-content: center;
+  
+  @media (max-width: 768px) {
+    width: 60%;
+    top: 10px;
+  }
+  
   .outline-x {
     position: absolute;
     inset: 0;
     pointer-events: none;
+    
+    @media (max-width: 768px) {
+      width: 100%;
+      height: 100%;
+    }
   }
 
   .rect {
@@ -78,6 +89,16 @@ const StyledWrapper = styled.div`
     width: 400px;
     height: 60px;
     border-radius: 40px;
+    
+    @media (max-width: 768px) {
+      width: 300px;
+      height: 45px;
+    }
+    
+    @media (max-width: 480px) {
+      width: 100%;
+      height: 40px;
+    }
   }
 
   .container:hover .outline .rect {
@@ -103,6 +124,16 @@ const StyledWrapper = styled.div`
     color: #fff;
     cursor: pointer;
     transition: 0.1s;
+    
+    @media (max-width: 768px) {
+      padding: 0.3em 0.8em;
+      font-size: 0.9rem;
+    }
+    
+    @media (max-width: 480px) {
+      padding: 0.2em 0.6em;
+      font-size: 0.8rem;
+    }
   }
 
   .btn:hover {

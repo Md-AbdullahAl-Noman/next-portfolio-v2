@@ -75,11 +75,7 @@ export const skills = [
     category: 'frontend',
     icon: SiNextdotjs,
   },
-  {
-    name: 'Sass',
-    category: 'frontend',
-    icon: SiSass,
-  },
+  
   {
     name: 'Tailwind CSS',
     category: 'frontend',
@@ -161,16 +157,8 @@ export const skills = [
     category: 'other',
     icon: SiJira,
   },
-  {
-    name: 'Confluence',
-    category: 'other',
-    icon: SiConfluence,
-  },
-  {
-    name: 'Pytest',
-    category: 'testing',
-    icon: SiPytest,
-  },
+
+ 
   {
     name: 'Selenium',
     category: 'testing',
@@ -181,11 +169,7 @@ export const skills = [
     category: 'testing',
     icon: SiPostman,
   },
-  {
-    name: 'EJS',
-    category: 'other',
-    icon: SiEjs,
-  },
+ 
   {
     name: 'MongoDB',
     category: 'databases',
@@ -201,16 +185,8 @@ export const skills = [
     category: 'testing',
     icon: null,
   },
-  {
-    name: 'Sauce Labs',
-    category: 'testing',
-    icon: SiSaucelabs,
-  },
-  {
-    name: 'Ghost Inspector',
-    category: 'testing',
-    icon: null,
-  },
+
+
   {
     name: 'Socket.io',
     category: 'backend',
