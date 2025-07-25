@@ -62,7 +62,7 @@ const StyledWrapper = styled.div`
   justify-content: center;
   
   @media (max-width: 768px) {
-    width: 60%;
+    width: 70%;
     top: 10px;
   }
   
