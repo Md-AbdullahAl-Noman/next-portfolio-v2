@@ -10,7 +10,7 @@
       "github": "https://github.com/Md-AbdullahAl-Noman",
       "live": "https://autoworx.tech/"
     },
-    "figma_link": "your-figma-link"
+    "figma_link": " "
   },
   {
     "id": "automation-backend",
@@ -22,7 +22,8 @@
     "links": {
       "github": "https://github.com/Md-AbdullahAl-Noman/autoworx-backend",
       "live": "https://api.autoworx.tech/api-docs"
-    }
+    },
+    "figma_link": " "
   },
   {
     "id": "luminar-technology",
@@ -34,7 +35,8 @@
     "links": {
       "github": "https://github.com/Md-AbdullahAl-Noman/luminartechnology",
       "live": "https://www.luminartechnology.com/"
-    }
+    },
+    "figma_link": ""
   },
   {
     "id": "menu-app",
@@ -46,6 +48,7 @@
     "links": {
       "live": "https://menu.lamsatalbaharat.com/",
       "github": "https://github.com/Md-AbdullahAl-Noman/menuapp-react"
-    }
+    },
+    "figma_link": ""
   }
 ]
