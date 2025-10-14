@@ -173,7 +173,7 @@ const Hero = () => {
         </motion.div>
         <motion.div variants={heroChildVariants} className="w-full sm:w-auto">
           <Link
-            href={'/Abdullah-Al-Noman-SoftwareEngineer.pdf'}
+            href={'/Md-Abdullah-Al-Noman_CV.pdf'}
             target="_blank"
           >
             <Button className="w-full sm:w-auto">
