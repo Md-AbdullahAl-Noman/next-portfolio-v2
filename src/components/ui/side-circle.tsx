@@ -26,7 +26,7 @@ const SideAnimation = () => {
             <span />
             <span />
             <span />
-            <a href="https://www.linkedin.com/in/abdullah-al-noman-se/">
+            <a href="https://www.linkedin.com/in/alnoman-se/">
               <svg
                 className="svg"
                 xmlns="http://www.w3.org/2000/svg"
