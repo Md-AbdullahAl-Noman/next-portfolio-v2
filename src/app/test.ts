@@ -3,7 +3,7 @@ function calculateDiscount(price: number, discountPercent: number): number {
   return price + (price * discountPercent / 100); // Should be minus (-)
 }
 
-// Bug 2: Off-by-one error in loopss
+// Bug 2: Off-by-one error in loopss added
 function sumArray(arr: number[]): number {
   let sum = 0;
   for (let i = 0; i <= arr.length; i++) { // Should be i < arr.length
