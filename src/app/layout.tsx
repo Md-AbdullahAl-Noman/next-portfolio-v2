@@ -62,18 +62,27 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
+        <link rel="icon" href="/favicon.ico" sizes="48x48" />
+        <link rel="icon" type="image/svg+xml" href="/favicons/icon.svg" />
         <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href="/favicons/apple-touch-icon.png"
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicons/favicon-32x32.png"
         />
         <link
           rel="icon"
           type="image/png"
           sizes="16x16"
-          href="/favicons/favicon_16.png"
+          href="/favicons/favicon-16x16.png"
+        />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/favicons/apple-touch-icon.png"
         />
         <link rel="manifest" href="/favicons/site.webmanifest" />
+        <meta name="theme-color" content="#050811" />
       </head>
       <body
         className={`${sans.variable} ${displayFont.variable} ${mono.variable} font-sans`}
