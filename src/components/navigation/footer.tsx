@@ -13,7 +13,7 @@ const socials = [
   {
     name: 'LinkedIn',
     icon: SiLinkedin,
-    href: 'https://www.linkedin.com/in/abdullah-al-noman-se/',
+    href: 'https://www.linkedin.com/in/alnoman-se/',
   },
 ]
 

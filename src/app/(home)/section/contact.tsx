@@ -109,7 +109,7 @@ const Contact = () => {
               },
               {
                 icon: SiLinkedin,
-                href: 'https://www.linkedin.com/in/abdullah-al-noman-se/',
+                href: 'https://www.linkedin.com/in/alnoman-se/',
                 label: 'LinkedIn',
               },
             ].map(({ icon: Icon, href, label }) => (
