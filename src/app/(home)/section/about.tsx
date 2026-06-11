@@ -1,325 +1,139 @@
 'use client'
 
-import { motion, useAnimation, useInView, Variants } from 'framer-motion'
+import { motion, type Variants } from 'framer-motion'
 import Image from 'next/image'
-import { useEffect, useRef } from 'react'
 
-import { Heading } from '@/components/ui/heading'
-import Linemaker from '@/components/ui/line'
-import TitleBar from '@/components/ui/title'
+import SectionHeading from '@/components/ui/section-heading'
+import { Tilt } from '@/components/ui/tilt'
 
-interface TimelineItem {
-  year: string
-  title: string
-  description: string
-  icon: string
+const container: Variants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.15, delayChildren: 0.2 } },
 }
 
-const timelineData: TimelineItem[] = [
-  {
-    year: '2025',
-    title: 'Senior Software Engineer @ Autoworx',
-    description:
-      'Led multiple successful projects and mentored junior developers',
-    icon: '/business-development.gif',
+const fadeUp: Variants = {
+  hidden: { y: 30, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
   },
-  {
-    year: '2024',
-    title: 'Junior Software Engineer',
-    description:
-      'Contributed to a successful project and learned new technologies',
-    icon: '/target.gif',
-  },
-  {
-    year: '2024',
-    title: 'Internship',
-    description: 'Worked as a software developer intern',
-    icon: '/trophy.gif',
-  },
+}
+
+const highlights = [
+  { label: 'Lead Engineer @ Autoworx', dot: 'bg-cyan-400' },
+  { label: 'B.Sc. CSE — CGPA 3.88', dot: 'bg-indigo-400' },
+  { label: 'Academic Scholarship Awardee', dot: 'bg-emerald-400' },
+  { label: 'DevOps & Linux Enthusiast', dot: 'bg-amber-400' },
 ]
 
 const About = () => {
   return (
-    <motion.div className="space-y-16 py-16">
-      <div className="flex w-full items-start justify-center">
-        <div className=" ml:14 w-[300px] rounded-r-md bg-gray-200 md:ml-16">
-          <TitleBar text="About" strokeColor="black" />
-        </div>
-      </div>
-      <div className="grid h-full w-full grid-cols-1 gap-8 sm:gap-12 md:grid-cols-2">
-        <ProfileImage />
-        <ProfileContent />
-      </div>
-
-      {/* Yellow Borders */}
-
-      <div className="absolute top-[744px] hidden h-3 w-3 rounded-xl md:block">
-        <Linemaker direction="horizontal" width="1810px" />
-      </div>
-
-      <div className="absolute bottom-0 right-0 top-[744px] hidden w-3 rounded-xl md:block">
-        <Linemaker direction="vertical" height="738px" width="6px" />
-      </div>
-
-      <div className="absolute left-[100px] top-[1482px] hidden h-3 w-3 rounded-xl md:block">
-        <Linemaker direction="horizontal" width="2430px" />
-      </div>
-      <div className="hidden md:block">
-        <Experience />
-      </div>
-    </motion.div>
-  )
-}
-
-const ProfileImage = () => {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true })
-
-  const controls = useAnimation()
-
-  useEffect(() => {
-    if (isInView) {
-      controls.start('visible')
-    }
-  }, [isInView, controls])
-
-  const profileImageVariants: Variants = {
-    hidden: { width: '100%' },
-    visible: {
-      width: '0%',
-      transition: {
-        ease: 'circOut',
-        duration: 1.2,
-      },
-    },
-  }
-
-  return (
-    <motion.div
-      ref={ref}
-      className="relative aspect-square h-full w-full md:max-h-[450px] md:max-w-[450px]"
-    >
-      <Image
-        src="/main-photo.png"
-        alt={'profile picture'}
-        fill
-        priority
-        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"
-        className="aspect-square rounded object-contain"
+    <div className="space-y-16 py-24 md:py-32">
+      <SectionHeading
+        index="01"
+        eyebrow="About"
+        title={
+          <>
+            Engineer. Builder. <span className="text-gradient">Leader.</span>
+          </>
+        }
       />
-      <motion.div
-        variants={profileImageVariants}
-        initial="hidden"
-        animate={controls}
-        className="absolute h-full w-full bg-[var(--foreground)]"
-      />
-    </motion.div>
-  )
-}
 
-const ProfileContent = () => {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true })
-
-  const controls = useAnimation()
-
-  useEffect(() => {
-    if (isInView) {
-      controls.start('visible')
-    }
-  }, [isInView, controls])
-
-  const profileContentVariants: Variants = {
-    hidden: {
-      x: 0.1,
-    },
-    visible: {
-      x: 0,
-      transition: {
-        delay: 0.4,
-        staggerChildren: 0.25,
-        staggerDirection: 1,
-        when: 'beforeChildren',
-      },
-    },
-  }
-
-  const profileContentChildVariants: Variants = {
-    hidden: { x: 30, opacity: 0 },
-    visible: {
-      x: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.8,
-        ease: 'easeOut',
-      },
-    },
-  }
-
-  return (
-    <motion.div
-      ref={ref}
-      variants={profileContentVariants}
-      initial="hidden"
-      animate={controls}
-      className="flex flex-col items-start space-y-4"
-    >
-      <motion.div
-        variants={profileContentChildVariants}
-        className="text-2xl font-semibold"
-      >
-        Hi, I&apos;m{' '}
-        <span className="text-[var(--primary)]">Md Abdullah Al Noman</span>
-      </motion.div>
-      <div className="space-y-4 text-justify">
-        <motion.div variants={profileContentChildVariants}>
-          🌟 A passionate software engineer and full-stack developer with
-          expertise in building scalable, interactive, and efficient web
-          applications. I specialize in modern web technologies and have a
-          strong foundation in problem-solving, project management, and user
-          experience design.
-        </motion.div>
-        <motion.div variants={profileContentChildVariants}>
-          🎓 I am a graduating student from the American International
-          University-Bangladesh with a Bachelor’s Degree in Computer Science and
-          Engineering, maintaining a CGPA of 3.88. I have consistently been
-          awarded academic scholarships for outstanding performance.
-        </motion.div>
-        <motion.div variants={profileContentChildVariants}>
-          💻 Currently, I am working as a Lead Software Engineer Autoworx, where
-          I design and develop responsive web applications using Nest JS,
-          Next.js, React, and other modern technologies. I am also actively
-          learning DevOps and enhancing my skills in Linux to broaden my
-          expertise.
-        </motion.div>
-        <motion.div variants={profileContentChildVariants}>
-          🚀 My interests include solving problems on LeetCode to refine my
-          understanding of data structures and algorithms, as well as exploring
-          machine learning to apply innovative solutions to real-world
-          challenges.
-        </motion.div>
-      </div>
-    </motion.div>
-  )
-}
-
-const Experience = () => {
-  const observerRef = useRef<IntersectionObserver | null>(null)
-  const timelineRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    observerRef.current = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('timeline-active')
-          }
-        })
-      },
-      {
-        threshold: 1,
-      },
-    )
-
-    const timelineItems = document.querySelectorAll('.timeline-item')
-    timelineItems.forEach((item) => {
-      observerRef.current?.observe(item)
-    })
-
-    return () => {
-      if (observerRef.current) {
-        observerRef.current.disconnect()
-      }
-    }
-  }, [])
-
-  return (
-    <div className="min-h-screen px-4 py-16">
-      <div className="mx-auto max-w-3xl">
-        {/* Timeline Line - Hidden on small screens */}
-        <div className="relative mt-12" ref={timelineRef}>
-          <div className="absolute left-1/2 hidden h-full w-1 -translate-x-1/2 transform md:block">
-            <Linemaker direction="vertical" height="740px" width="6px" />
+      <div className="grid w-full items-center gap-12 md:grid-cols-2 md:gap-16">
+        {/* PHOTO */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.92 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+          className="relative mx-auto aspect-square w-full max-w-[420px]"
+        >
+          {/* rotating conic ring */}
+          <div className="absolute -inset-3 rounded-3xl opacity-60">
+            <div className="animate-spin-slow absolute inset-0 rounded-3xl bg-[conic-gradient(from_0deg,transparent_0%,#22d3ee_12%,transparent_25%,transparent_50%,#818cf8_62%,transparent_75%)] blur-md" />
           </div>
+          <Tilt max={8} className="h-full w-full">
+            <div className="card-surface relative h-full w-full overflow-hidden rounded-3xl">
+              <Image
+                src="/main-photo.png"
+                alt="Md Abdullah Al Noman"
+                fill
+                priority
+                sizes="(max-width: 768px) 100vw, 40vw"
+                className="object-contain p-2 transition-transform duration-700 hover:scale-[1.03]"
+              />
+            </div>
+          </Tilt>
+          {/* floating experience badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.5, duration: 0.7 }}
+            className="card-surface absolute -bottom-5 -right-3 rounded-2xl px-5 py-3 shadow-xl sm:-right-6"
+          >
+            <div className="font-display text-2xl font-bold text-gradient">3+</div>
+            <div className="text-xs text-muted">Years shipping</div>
+          </motion.div>
+        </motion.div>
 
-          {/* Mobile-optimized timeline */}
-          <div className="space-y-8 md:space-y-16">
-            {timelineData.map((item, index) => (
-              <div
-                key={index}
-                className={`timeline-item relative opacity-0 transition-all duration-1000 ease-out ${
-                  index % 2 === 0 ? 'left-item' : 'right-item'
-                }`}
+        {/* CONTENT */}
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-100px' }}
+          className="flex flex-col space-y-6"
+        >
+          <motion.h3
+            variants={fadeUp}
+            className="font-display text-2xl font-semibold tracking-tight sm:text-3xl"
+          >
+            Hi, I&apos;m{' '}
+            <span className="text-cyan-300">Md Abdullah Al Noman</span>
+          </motion.h3>
+
+          <motion.p variants={fadeUp} className="leading-relaxed text-muted">
+            A software engineer who cares about the whole product — clean
+            architecture, fast interfaces, and code a team can grow on. I
+            specialize in the modern TypeScript ecosystem and have a strong
+            foundation in problem solving, system design, and developer
+            experience.
+          </motion.p>
+
+          <motion.p variants={fadeUp} className="leading-relaxed text-muted">
+            Currently I lead engineering at{' '}
+            <span className="font-medium text-foreground">Autoworx</span>,
+            where I architect and build responsive web platforms with NestJS,
+            Next.js, and React — owning features from database schema to
+            production deploys, while mentoring the engineers around me.
+          </motion.p>
+
+          <motion.p variants={fadeUp} className="leading-relaxed text-muted">
+            I graduated from American International University–Bangladesh with
+            a B.Sc. in Computer Science & Engineering (CGPA 3.88), earning
+            academic scholarships throughout. Off the clock you&apos;ll find me
+            grinding LeetCode, exploring machine learning, and leveling up my
+            DevOps and Linux skills.
+          </motion.p>
+
+          {/* highlight chips */}
+          <motion.div variants={fadeUp} className="flex flex-wrap gap-3 pt-2">
+            {highlights.map(({ label, dot }) => (
+              <span
+                key={label}
+                className="card-surface inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-medium text-slate-300"
               >
-                {/* For medium screens and up - Side by side layout */}
-                <div
-                  className={`hidden items-center md:flex ${
-                    index % 2 === 0 ? 'justify-end' : 'justify-start'
-                  }`}
-                >
-                  <div
-                    className={`w-1/2 ${
-                      index % 2 === 0 ? 'pr-8 text-right' : 'pl-8'
-                    }`}
-                  >
-                    <div className="m-4 transform rounded-lg bg-gray-800 p-6 shadow-xl transition-transform duration-300 hover:scale-105">
-                      <span className="font-semibold text-emerald-400">
-                        {item.year}
-                      </span>
-                      <h3 className="mt-2 text-xl font-bold text-white">
-                        {item.title}
-                      </h3>
-                      <p className="mt-2 text-gray-400">{item.description}</p>
-                    </div>
-                  </div>
-                  <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform">
-                    <div className="rounded-full bg-gray-600 px-2 py-2 shadow-lg">
-                      {item.icon && (
-                        <Image
-                          src={item.icon}
-                          alt={item.title}
-                          className="rounded-full bg-black"
-                          width={42}
-                          height={42}
-                        />
-                      )}
-                    </div>
-                  </div>
-                </div>
-
-                {/* For small screens - Stacked layout */}
-                <div className="block md:hidden">
-                  <div className="mb-3 flex items-center space-x-4">
-                    <div className="rounded-full bg-gray-600 px-2 py-2 shadow-lg">
-                      {item.icon && (
-                        <Image
-                          src={item.icon}
-                          alt={item.title}
-                          className="rounded-full bg-black"
-                          width={32}
-                          height={32}
-                        />
-                      )}
-                    </div>
-                    <span className="font-semibold text-emerald-400">
-                      {item.year}
-                    </span>
-                  </div>
-                  <div className="rounded-lg bg-gray-800 p-4 shadow-xl">
-                    <h3 className="text-lg font-bold text-white">
-                      {item.title}
-                    </h3>
-                    <p className="mt-2 text-sm text-gray-400">
-                      {item.description}
-                    </p>
-                  </div>
-                </div>
-              </div>
+                <span className={`size-1.5 rounded-full ${dot}`} />
+                {label}
+              </span>
             ))}
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     </div>
   )
 }
+
 export default About

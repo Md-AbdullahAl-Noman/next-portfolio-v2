@@ -1,33 +1,28 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
-import {
-  motion,
-  Variants,
-  AnimatePresence,
-  LayoutGroup,
-  useInView,
-  useAnimation,
-} from 'framer-motion'
+import { useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
 
-import { Heading } from '@/components/ui/heading'
-
+import SectionHeading from '@/components/ui/section-heading'
 import { skills } from '@/data/skills-sets'
-import { BackgroundGradient } from '@/components/ui/bg-gradient'
-import TitleBar from '@/components/ui/title'
 
-interface ISkillSets {
+interface ISkillSet {
   name: string
   category: string
   icon?: React.ComponentType<any> | null
 }
 
+const TABS = [
+  'All',
+  'languages',
+  'frontend',
+  'backend',
+  'databases',
+  'testing',
+  'other',
+]
+
 const Skills = () => {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true })
-
-  const controls = useAnimation()
-
   const [selectedTab, setSelectedTab] = useState('All')
 
   const filteredSkills =
@@ -35,125 +30,109 @@ const Skills = () => {
       ? skills
       : skills.filter((skill) => skill.category.includes(selectedTab))
 
-  const tab = [
-    'All',
-    'languages',
-    'frontend',
-    'backend',
-    'databases',
-    'testing',
-    'other',
-  ]
-
-  useEffect(() => {
-    if (isInView) {
-      controls.start('visible')
-    }
-  }, [isInView, controls])
-
-  const skillVariants: Variants = {
-    hidden: {
-      y: -0.1,
-    },
-    visible: {
-      y: 0,
-      transition: {
-        delay: 0.4,
-        staggerChildren: 0.25,
-        staggerDirection: 1,
-        when: 'beforeChildren',
-      },
-    },
-  }
-
-  const skillChildVariants: Variants = {
-    hidden: { y: -30, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.6,
-        ease: 'easeOut',
-      },
-    },
-  }
-
   return (
-    <motion.div
-      ref={ref}
-      variants={skillVariants}
-      initial="hidden"
-      animate={controls}
-      className="space-y-16 py-16"
-    >
-      <div className="flex w-full items-start justify-center">
-        <div className=" ml-16 w-[400px] rounded-r-md bg-gray-200">
-          <TitleBar text="Skills" strokeColor="black" />
-        </div>
-      </div>
+    <div className="space-y-14 py-24 md:py-32">
+      <SectionHeading
+        index="03"
+        eyebrow="Skills"
+        title={
+          <>
+            Tools I <span className="text-gradient">think in</span>
+          </>
+        }
+        description="A battle-tested toolkit, sharpened across production systems."
+      />
+
       {/* TABS */}
-      <div className="flex flex-wrap justify-center gap-4">
-        {tab.map((item) => (
-          <motion.button
-            key={item}
-            variants={skillChildVariants}
-            onClick={() => setSelectedTab(item)}
-            className={`${selectedTab === item ? 'tab text-[var(--primary)]' : ''} hover:text-primary-200 cursor-pointer font-medium capitalize outline-none transition-colors duration-300`}
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="flex flex-wrap justify-center gap-2"
+      >
+        {TABS.map((tab) => (
+          <button
+            key={tab}
+            onClick={() => setSelectedTab(tab)}
+            className={`relative rounded-full px-4 py-2 text-sm font-medium capitalize transition-colors duration-300 ${
+              selectedTab === tab
+                ? 'text-slate-950'
+                : 'text-slate-400 hover:text-slate-100'
+            }`}
           >
-            {item}
-          </motion.button>
+            {selectedTab === tab && (
+              <motion.span
+                layoutId="skill-tab"
+                transition={{ type: 'spring', stiffness: 400, damping: 32 }}
+                className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-400 to-sky-400 shadow-[0_4px_20px_-6px_rgba(34,211,238,0.7)]"
+              />
+            )}
+            <span className="relative z-10">{tab}</span>
+          </button>
         ))}
-      </div>
-      {/* SKILLS CONTENT */}
-      <LayoutGroup>
-        <motion.div
-          layout
-          variants={skillChildVariants}
-          className="grid grid-cols-3 gap-4 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6"
-        >
-          <AnimatePresence>
-            {filteredSkills.map((skill, index) => (
-              <SkillSets key={index} skill={skill} />
-            ))}
-          </AnimatePresence>
-        </motion.div>
-      </LayoutGroup>
-    </motion.div>
+      </motion.div>
+
+      {/* GRID */}
+      <motion.div
+        layout
+        className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 md:grid-cols-4 lg:grid-cols-5"
+      >
+        <AnimatePresence mode="popLayout">
+          {filteredSkills.map((skill) => (
+            <SkillTile key={skill.name} skill={skill} />
+          ))}
+        </AnimatePresence>
+      </motion.div>
+    </div>
   )
 }
 
-const SkillSets = ({ skill }: { skill: ISkillSets }) => {
-  const skillSetsVariants: Variants = {
-    initial: {
-      opacity: 0,
-      scale: 0,
-    },
-    animate: {
-      opacity: 1,
-      scale: 1,
-      transition: { duration: 0.4 },
-    },
-    exit: {
-      opacity: 0,
-      scale: 0,
-      transition: { duration: 0.4 },
-    },
-  }
+const CATEGORY_STYLE: Record<string, { text: string; glow: string }> = {
+  languages: { text: 'group-hover:text-amber-300', glow: 'bg-amber-400/20' },
+  frontend: { text: 'group-hover:text-cyan-300', glow: 'bg-cyan-400/20' },
+  backend: { text: 'group-hover:text-emerald-300', glow: 'bg-emerald-400/20' },
+  databases: { text: 'group-hover:text-indigo-300', glow: 'bg-indigo-400/20' },
+  testing: { text: 'group-hover:text-rose-300', glow: 'bg-rose-400/20' },
+  other: { text: 'group-hover:text-sky-300', glow: 'bg-sky-400/20' },
+}
+
+const SkillTile = ({ skill }: { skill: ISkillSet }) => {
+  const Icon = skill.icon
+  const style = CATEGORY_STYLE[skill.category] ?? CATEGORY_STYLE.other
 
   return (
-    <BackgroundGradient>
-      <motion.div
-        layout
-        variants={skillSetsVariants}
-        initial="initial"
-        animate="animate"
-        exit="exit"
-        className="w-50 h-50 flex h-full w-full flex-col items-center justify-center space-y-2 whitespace-nowrap rounded-lg p-4 text-sm"
+    <motion.div
+      layout
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.8 }}
+      whileHover={{ rotate: [0, -2, 2, 0], transition: { duration: 0.4 } }}
+      transition={{ type: 'spring', stiffness: 300, damping: 24 }}
+      className="card-surface card-surface-hover group relative flex flex-col items-center justify-center gap-3 overflow-hidden rounded-2xl px-4 py-6"
+    >
+      {/* category-colored glow that breathes in on hover */}
+      <div
+        className={`pointer-events-none absolute -top-8 left-1/2 size-24 -translate-x-1/2 rounded-full opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100 ${style.glow}`}
+      />
+      <div
+        className={`relative text-slate-400 transition-all duration-300 group-hover:-rotate-6 group-hover:scale-125 ${style.text}`}
       >
-        <div className="relative z-10">{skill.icon && <skill.icon />}</div>
-        <div className="relative z-10">{skill.name}</div>
-      </motion.div>
-    </BackgroundGradient>
+        {Icon ? (
+          <Icon className="size-7" />
+        ) : (
+          <span className="flex size-7 items-center justify-center rounded-md border border-[var(--border)] font-mono text-xs">
+            {skill.name[0]}
+          </span>
+        )}
+      </div>
+      <div className="relative text-center text-sm font-medium text-slate-300 transition-colors duration-300 group-hover:text-foreground">
+        {skill.name}
+      </div>
+      <div className="relative font-mono text-[10px] uppercase tracking-widest text-slate-600">
+        {skill.category}
+      </div>
+    </motion.div>
   )
 }
 

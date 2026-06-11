@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import * as yup from 'yup'
 import toast from 'react-hot-toast'
 import { useForm } from 'react-hook-form'
@@ -9,77 +10,120 @@ import { PaperAirplaneIcon } from '@heroicons/react/24/solid'
 import { Button } from '@/components/ui/button'
 
 type FormData = {
-  name?: string
+  name: string
   email: string
   subject: string
   message: string
 }
 
 const schema = yup.object({
-  name: yup.string().required(),
-  email: yup.string().email().required(),
-  subject: yup.string().required(),
-  message: yup.string().required(),
+  name: yup.string().required('Your name is required'),
+  email: yup
+    .string()
+    .email('Enter a valid email')
+    .required('Your email is required'),
+  subject: yup.string().required('A subject is required'),
+  message: yup.string().required('A message is required'),
 })
 
+const inputClass = (hasError: boolean) =>
+  `w-full rounded-xl border bg-white/[0.03] px-4 py-3 text-sm text-foreground placeholder-slate-500 outline-none backdrop-blur-sm transition-all duration-300 focus:bg-white/[0.05] ${
+    hasError
+      ? 'border-rose-500/60 focus:border-rose-400'
+      : 'border-[var(--border)] focus:border-cyan-400/60 focus:shadow-[0_0_0_3px_rgba(34,211,238,0.1)]'
+  }`
+
+const Field = ({
+  label,
+  error,
+  children,
+}: {
+  label: string
+  error?: string
+  children: React.ReactNode
+}) => (
+  <div className="space-y-1.5">
+    <label className="font-mono text-xs uppercase tracking-[0.18em] text-slate-500">
+      {label}
+    </label>
+    {children}
+    {error && <p className="text-xs text-rose-400">{error}</p>}
+  </div>
+)
+
 const ContactForm = () => {
+  const [sending, setSending] = useState(false)
+
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm({
+  } = useForm<FormData>({
     resolver: yupResolver(schema),
   })
-  const onSubmit = (data: FormData) => {
+
+  const onSubmit = async (data: FormData) => {
+    setSending(true)
     try {
-      fetch('/api/contact', {
+      const res = await fetch('/api/contact', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       })
+      if (!res.ok) throw new Error('Failed to send')
 
-      toast.success('Email sent successfully')
+      toast.success('Message sent — I’ll get back to you soon!')
       reset()
-    } catch (error) {
-      toast.error('An error occurred while sending an email')
+    } catch {
+      toast.error('Something went wrong. Please try again.')
+    } finally {
+      setSending(false)
     }
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="w-full space-y-4">
-      <input
-        {...register('name')}
-        placeholder="Name *"
-        type="text"
-        className={`${errors.name ? 'border-red-500 placeholder-red-400' : ''} w-full border-b-2 border-[var(--primary)] bg-transparent py-2 text-[var(--background)] caret-[var(--primary)] outline-none transition-colors duration-500 ease-linear focus:border-[var(--accent)]`}
-      />
+    <form onSubmit={handleSubmit(onSubmit)} className="w-full space-y-5">
+      <div className="grid gap-5 sm:grid-cols-2">
+        <Field label="Name" error={errors.name?.message}>
+          <input
+            {...register('name')}
+            placeholder="Jane Doe"
+            type="text"
+            className={inputClass(!!errors.name)}
+          />
+        </Field>
+        <Field label="Email" error={errors.email?.message}>
+          <input
+            {...register('email')}
+            placeholder="jane@company.com"
+            type="email"
+            className={inputClass(!!errors.email)}
+          />
+        </Field>
+      </div>
 
-      <input
-        {...register('email')}
-        placeholder="Email *"
-        type="email"
-        className={`${errors.email ? 'border-red-500 placeholder-red-400' : ''} w-full border-b-2 border-[var(--primary)] bg-transparent py-2 text-[var(--background)] caret-[var(--primary)] outline-none transition-colors duration-500 ease-linear focus:border-[var(--accent)]`}
-      />
+      <Field label="Subject" error={errors.subject?.message}>
+        <input
+          {...register('subject')}
+          placeholder="Let's talk about..."
+          type="text"
+          className={inputClass(!!errors.subject)}
+        />
+      </Field>
 
-      <input
-        {...register('subject')}
-        placeholder="Subject *"
-        type="text"
-        className={`${errors.subject ? 'border-red-500 placeholder-red-400' : ''} w-full border-b-2 border-[var(--primary)] bg-transparent py-2 text-[var(--background)] caret-[var(--primary)] outline-none transition-colors duration-500 ease-linear focus:border-[var(--accent)]`}
-      />
+      <Field label="Message" error={errors.message?.message}>
+        <textarea
+          {...register('message')}
+          placeholder="Tell me about your project, idea, or opportunity..."
+          rows={5}
+          className={`${inputClass(!!errors.message)} max-h-[280px] min-h-[120px] resize-y`}
+        />
+      </Field>
 
-      <textarea
-        {...register('message')}
-        placeholder="Message *"
-        className={`${errors.message ? 'border-red-500 placeholder-red-400' : ''} h-full max-h-[250px] min-h-[100px] w-full border-b-2 border-[var(--primary)] bg-transparent py-2 text-[var(--background)] caret-[var(--primary)] outline-none transition-colors duration-500 ease-linear focus:border-[var(--accent)]`}
-      />
-      <Button className="mt-4" type="submit">
-        <div className=" flex items-center justify-center">
-          Send <PaperAirplaneIcon className="mb-1 ml-2 size-4" />
-        </div>
+      <Button type="submit" disabled={sending} className="w-full sm:w-auto">
+        {sending ? 'Sending...' : 'Send message'}
+        <PaperAirplaneIcon className="size-4 transition-transform duration-300 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-0.5" />
       </Button>
     </form>
   )

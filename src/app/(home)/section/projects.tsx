@@ -1,78 +1,33 @@
 'use client'
 
 import { ArrowRightIcon } from '@heroicons/react/24/solid'
-import { motion, useAnimation, useInView, Variants } from 'framer-motion'
+import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { useEffect, useRef } from 'react'
 
 import { Button } from '@/components/ui/button'
-import { Heading } from '@/components/ui/heading'
 import { ProjectCard } from '@/components/ui/project-card'
+import SectionHeading from '@/components/ui/section-heading'
 
 import projects from '@/data/projects.json'
-import TitleBar from '@/components/ui/title'
 
 const Projects = () => {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true })
-
-  const controls = useAnimation()
-
-  useEffect(() => {
-    if (isInView) {
-      controls.start('visible')
-    }
-  }, [isInView, controls])
-
-  const projectsFiltered = projects.filter(
-    (project) => project.featured === true,
-  )
-
-  const projectVariants: Variants = {
-    hidden: {
-      y: -0.1,
-    },
-    visible: {
-      y: 0,
-      transition: {
-        delay: 0.4,
-        staggerChildren: 0.25,
-        staggerDirection: 1,
-        when: 'beforeChildren',
-      },
-    },
-  }
-
-  const projectChildVariants: Variants = {
-    hidden: { x: -30, opacity: 0 },
-    visible: {
-      x: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.8,
-        ease: 'easeOut',
-      },
-    },
-  }
+  const featured = projects.filter((project) => project.featured === true)
 
   return (
-    <motion.div
-      ref={ref}
-      variants={projectVariants}
-      initial="hidden"
-      animate={controls}
-      className="flex flex-col items-center justify-center space-y-16 py-16"
-    >
-      <div className="flex w-full items-start justify-center">
-        <div className="  ml-14 w-[300px] rounded-r-md bg-gray-200 md:ml-16">
-          <TitleBar text="Projects" strokeColor="black" />
-        </div>
-      </div>
-      <motion.div
-        variants={projectChildVariants}
-        className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3"
-      >
-        {projectsFiltered.map((project) => (
+    <div className="flex flex-col items-center space-y-14 py-24 md:py-32">
+      <SectionHeading
+        index="04"
+        eyebrow="Projects"
+        title={
+          <>
+            Built to <span className="text-gradient">ship</span>
+          </>
+        }
+        description="Selected work — real products solving real problems in production."
+      />
+
+      <div className="grid w-full grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {featured.map((project, index) => (
           <ProjectCard
             key={project.id}
             id={project.id}
@@ -80,20 +35,25 @@ const Projects = () => {
             description={project.description}
             img={project.img}
             techstack={project.techstack}
+            index={index}
           />
         ))}
-      </motion.div>
-      <motion.div variants={projectChildVariants}>
+      </div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+      >
         <Link href="/projects">
-          <Button>
-            <div className="flex items-center justify-center gap-2">
-              View All Projects
-              <ArrowRightIcon className="social mb-1 size-6 transform duration-300 ease-out will-change-transform group-hover:-rotate-45 group-hover:scale-90 group-hover:text-[var(--foreground)]" />
-            </div>
+          <Button variant="outline">
+            View all projects
+            <ArrowRightIcon className="size-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
           </Button>
         </Link>
       </motion.div>
-    </motion.div>
+    </div>
   )
 }
 

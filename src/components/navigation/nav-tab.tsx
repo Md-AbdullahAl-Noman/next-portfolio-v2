@@ -1,171 +1,100 @@
 'use client'
-import React from 'react'
-import styled from 'styled-components'
+
+import { useEffect, useState } from 'react'
+import { motion, useScroll, useSpring } from 'framer-motion'
+import {
+  HomeIcon,
+  UserIcon,
+  MapIcon,
+  WrenchScrewdriverIcon,
+  FolderOpenIcon,
+  EnvelopeIcon,
+} from '@heroicons/react/24/solid'
+
+const LINKS = [
+  { id: 'hero', label: 'Home', icon: HomeIcon },
+  { id: 'about', label: 'About', icon: UserIcon },
+  { id: 'journey', label: 'Journey', icon: MapIcon },
+  { id: 'skills', label: 'Skills', icon: WrenchScrewdriverIcon },
+  { id: 'projects', label: 'Projects', icon: FolderOpenIcon },
+  { id: 'contact', label: 'Contact', icon: EnvelopeIcon },
+]
 
 const NavigationTab = () => {
+  const [active, setActive] = useState('hero')
+  const { scrollYProgress } = useScroll()
+  const progress = useSpring(scrollYProgress, {
+    stiffness: 120,
+    damping: 30,
+    restDelta: 0.001,
+  })
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActive(entry.target.id)
+        })
+      },
+      { rootMargin: '-40% 0px -55% 0px' },
+    )
+
+    LINKS.forEach(({ id }) => {
+      const el = document.getElementById(id)
+      if (el) observer.observe(el)
+    })
+
+    return () => observer.disconnect()
+  }, [])
+
   const handleScroll = (id: string) => {
-    const element = document.getElementById(id)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-    }
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
   }
 
   return (
-    <StyledWrapper>
-      <div className="nav">
-        <div className="container">
-          <div className="btn" onClick={() => handleScroll('hero')}>
-            Home
-          </div>
-          <div className="btn" onClick={() => handleScroll('about')}>
-            About
-          </div>
-          <div className="btn" onClick={() => handleScroll('projects')}>
-            Projects
-          </div>
-          <div className="btn" onClick={() => handleScroll('contact')}>
-            Contact
-          </div>
+    <>
+      {/* page scroll progress */}
+      <motion.div
+        style={{ scaleX: progress }}
+        className="fixed inset-x-0 top-0 z-[60] h-[2px] origin-left bg-gradient-to-r from-cyan-400 via-sky-400 to-indigo-400"
+      />
 
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 400 60"
-            height={60}
-            width={400}
-            overflow="visible"
-            className="outline-x"
-          >
-            <rect
-              strokeWidth={5}
-              fill="transparent"
-              height={60}
-              width={400}
-              y={0}
-              x={0}
-              pathLength={100}
-              className="rect"
-            />
-          </svg>
-        </div>
+      {/* centered wrapper — translate is owned by flex, motion only animates y */}
+      <div className="pointer-events-none fixed inset-x-0 top-4 z-50 flex justify-center px-3">
+        <motion.nav
+          initial={{ y: -72, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+          className="pointer-events-auto"
+        >
+          <div className="flex items-center gap-0.5 rounded-full border border-[var(--border)] bg-[#0a1020]/70 px-1.5 py-1.5 shadow-[0_8px_32px_-8px_rgba(0,0,0,0.6)] backdrop-blur-xl sm:gap-1">
+            {LINKS.map(({ id, label, icon: Icon }) => (
+              <motion.button
+                key={id}
+                onClick={() => handleScroll(id)}
+                whileTap={{ scale: 0.9 }}
+                className={`relative flex items-center gap-1.5 rounded-full px-3 py-2 text-xs font-medium transition-colors duration-300 sm:px-4 sm:text-sm ${
+                  active === id
+                    ? 'text-slate-950'
+                    : 'text-slate-400 hover:text-slate-100'
+                }`}
+              >
+                {active === id && (
+                  <motion.span
+                    layoutId="nav-pill"
+                    transition={{ type: 'spring', stiffness: 400, damping: 32 }}
+                    className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-400 to-sky-400 shadow-[0_4px_16px_-4px_rgba(34,211,238,0.7)]"
+                  />
+                )}
+                <Icon className="relative z-10 size-4" />
+                <span className="relative z-10 hidden md:inline">{label}</span>
+              </motion.button>
+            ))}
+          </div>
+        </motion.nav>
       </div>
-    </StyledWrapper>
+    </>
   )
 }
-
-const StyledWrapper = styled.div`
-  position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1000;
-  display: flex;
-  justify-content: center;
-  
-  @media (max-width: 768px) {
-    width: 70%;
-    top: 10px;
-  }
-  
-  .outline-x {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    
-    @media (max-width: 768px) {
-      width: 100%;
-      height: 100%;
-    }
-  }
-
-  .rect {
-    stroke-dashoffset: 5;
-    stroke-dasharray: 0 0 10 40 10 40;
-    transition: 0.5s;
-    stroke: #e4ae0b;
-  }
-
-  .nav {
-    position: relative;
-    width: 400px;
-    height: 60px;
-    border-radius: 40px;
-    
-    @media (max-width: 768px) {
-      width: 300px;
-      height: 45px;
-    }
-    
-    @media (max-width: 480px) {
-      width: 100%;
-      height: 40px;
-    }
-  }
-
-  .container:hover .outline .rect {
-    transition: 999999s;
-    /* Must specify these values here as something *different* just so that the transition works properly */
-    stroke-dashoffset: 1;
-    stroke-dasharray: 0;
-  }
-
-  .container {
-    position: relative;
-    inset: 0;
-    background: rgba(16, 16, 16, 0.4);
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    padding: 0.5em;
-  }
-
-  .btn {
-    padding: 0.5em 1.5em;
-    color: #fff;
-    cursor: pointer;
-    transition: 0.1s;
-    
-    @media (max-width: 768px) {
-      padding: 0.3em 0.8em;
-      font-size: 0.9rem;
-    }
-    
-    @media (max-width: 480px) {
-      padding: 0.2em 0.6em;
-      font-size: 0.8rem;
-    }
-  }
-
-  .btn:hover {
-    background: #e4ae0b;
-    border-radius: 10px;
-  }
-
-  .btn:nth-child(1):hover ~ svg .rect {
-    stroke-dashoffset: 0;
-    stroke-dasharray: 0 2 8 73.3 8 10.7;
-  }
-
-  .btn:nth-child(2):hover ~ svg .rect {
-    stroke-dashoffset: 0;
-    stroke-dasharray: 0 12.6 9.5 49.3 9.5 31.6;
-  }
-
-  .btn:nth-child(3):hover ~ svg .rect {
-    stroke-dashoffset: 0;
-    stroke-dasharray: 0 24.5 8.5 27.5 8.5 55.5;
-  }
-
-  .btn:nth-child(4):hover ~ svg .rect {
-    stroke-dashoffset: 0;
-    stroke-dasharray: 0 34.7 6.9 10.2 6.9 76;
-  }
-
-  .btn:hover ~ .outline .rect {
-    stroke-dashoffset: 0;
-    stroke-dasharray: 0 0 10 40 10 40;
-    transition: 0.5s !important;
-  }
-`
 
 export default NavigationTab
