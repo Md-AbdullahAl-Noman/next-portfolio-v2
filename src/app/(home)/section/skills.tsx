@@ -1,159 +1,84 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
-import {
-  motion,
-  Variants,
-  AnimatePresence,
-  LayoutGroup,
-  useInView,
-  useAnimation,
-} from 'framer-motion'
+import { motion, type Variants } from 'framer-motion'
 
-import { Heading } from '@/components/ui/heading'
-
+import SectionHeading from '@/components/ui/section-heading'
 import { skills } from '@/data/skills-sets'
-import { BackgroundGradient } from '@/components/ui/bg-gradient'
-import TitleBar from '@/components/ui/title'
 
-interface ISkillSets {
-  name: string
-  category: string
-  icon?: React.ComponentType<any> | null
+const GROUPS: { key: string; label: string }[] = [
+  { key: 'languages', label: 'Languages' },
+  { key: 'frontend', label: 'Frontend' },
+  { key: 'backend', label: 'Backend' },
+  { key: 'databases', label: 'Databases' },
+  { key: 'testing', label: 'Testing & QA' },
+  { key: 'other', label: 'Tooling & Infra' },
+]
+
+const rowVariants: Variants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+  },
 }
 
 const Skills = () => {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true })
-
-  const controls = useAnimation()
-
-  const [selectedTab, setSelectedTab] = useState('All')
-
-  const filteredSkills =
-    selectedTab === 'All'
-      ? skills
-      : skills.filter((skill) => skill.category.includes(selectedTab))
-
-  const tab = [
-    'All',
-    'languages',
-    'frontend',
-    'backend',
-    'databases',
-    'testing',
-    'other',
-  ]
-
-  useEffect(() => {
-    if (isInView) {
-      controls.start('visible')
-    }
-  }, [isInView, controls])
-
-  const skillVariants: Variants = {
-    hidden: {
-      y: -0.1,
-    },
-    visible: {
-      y: 0,
-      transition: {
-        delay: 0.4,
-        staggerChildren: 0.25,
-        staggerDirection: 1,
-        when: 'beforeChildren',
-      },
-    },
-  }
-
-  const skillChildVariants: Variants = {
-    hidden: { y: -30, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.6,
-        ease: 'easeOut',
-      },
-    },
-  }
-
   return (
-    <motion.div
-      ref={ref}
-      variants={skillVariants}
-      initial="hidden"
-      animate={controls}
-      className="space-y-16 py-16"
-    >
-      <div className="flex w-full items-start justify-center">
-        <div className=" ml-16 w-[400px] rounded-r-md bg-gray-200">
-          <TitleBar text="Skills" strokeColor="black" />
-        </div>
-      </div>
-      {/* TABS */}
-      <div className="flex flex-wrap justify-center gap-4">
-        {tab.map((item) => (
-          <motion.button
-            key={item}
-            variants={skillChildVariants}
-            onClick={() => setSelectedTab(item)}
-            className={`${selectedTab === item ? 'tab text-[var(--primary)]' : ''} hover:text-primary-200 cursor-pointer font-medium capitalize outline-none transition-colors duration-300`}
-          >
-            {item}
-          </motion.button>
-        ))}
-      </div>
-      {/* SKILLS CONTENT */}
-      <LayoutGroup>
-        <motion.div
-          layout
-          variants={skillChildVariants}
-          className="grid grid-cols-3 gap-4 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6"
-        >
-          <AnimatePresence>
-            {filteredSkills.map((skill, index) => (
-              <SkillSets key={index} skill={skill} />
-            ))}
-          </AnimatePresence>
-        </motion.div>
-      </LayoutGroup>
-    </motion.div>
-  )
-}
+    <div className="space-y-16 py-24 md:space-y-20 md:py-32">
+      <SectionHeading
+        index="04"
+        eyebrow="Stack"
+        title={
+          <>
+            Tools I <span className="accent-italic">think in</span>
+          </>
+        }
+        description="A battle-tested toolkit, sharpened across production systems."
+      />
 
-const SkillSets = ({ skill }: { skill: ISkillSets }) => {
-  const skillSetsVariants: Variants = {
-    initial: {
-      opacity: 0,
-      scale: 0,
-    },
-    animate: {
-      opacity: 1,
-      scale: 1,
-      transition: { duration: 0.4 },
-    },
-    exit: {
-      opacity: 0,
-      scale: 0,
-      transition: { duration: 0.4 },
-    },
-  }
+      <div>
+        {GROUPS.map(({ key, label }) => {
+          const items = skills.filter((skill) => skill.category === key)
+          if (items.length === 0) return null
 
-  return (
-    <BackgroundGradient>
-      <motion.div
-        layout
-        variants={skillSetsVariants}
-        initial="initial"
-        animate="animate"
-        exit="exit"
-        className="w-50 h-50 flex h-full w-full flex-col items-center justify-center space-y-2 whitespace-nowrap rounded-lg p-4 text-sm"
-      >
-        <div className="relative z-10">{skill.icon && <skill.icon />}</div>
-        <div className="relative z-10">{skill.name}</div>
-      </motion.div>
-    </BackgroundGradient>
+          return (
+            <motion.div
+              key={key}
+              variants={rowVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-60px' }}
+              className="grid gap-3 border-t border-[var(--border)] py-8 md:grid-cols-[200px_1fr] md:gap-12"
+            >
+              <div className="flex items-baseline gap-2 pt-1">
+                <span className="label-mono">{label}</span>
+                <span className="font-mono text-[11px] text-[var(--primary)]">
+                  {String(items.length).padStart(2, '0')}
+                </span>
+              </div>
+              <div className="flex flex-wrap gap-x-2.5 gap-y-3">
+                {items.map((skill) => {
+                  const Icon = skill.icon
+                  return (
+                    <span
+                      key={skill.name}
+                      className="group inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--surface)] px-4 py-2 text-sm text-muted transition-all duration-300 hover:-translate-y-0.5 hover:border-[var(--primary)]/40 hover:bg-[var(--surface-2)] hover:text-foreground"
+                    >
+                      {Icon && (
+                        <Icon className="size-3.5 text-[var(--muted-2)] transition-colors duration-300 group-hover:text-[var(--primary)]" />
+                      )}
+                      {skill.name}
+                    </span>
+                  )
+                })}
+              </div>
+            </motion.div>
+          )
+        })}
+        <div className="hairline" />
+      </div>
+    </div>
   )
 }
 

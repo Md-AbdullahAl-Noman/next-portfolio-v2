@@ -2,9 +2,8 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { useEffect, useRef } from 'react'
-import { ArrowRightIcon } from '@heroicons/react/24/solid'
-import { motion, Variants, useAnimation, useInView } from 'framer-motion'
+import { ArrowUpRightIcon } from '@heroicons/react/24/outline'
+import { motion } from 'framer-motion'
 
 interface ProjectCardProps {
   id: string
@@ -12,6 +11,7 @@ interface ProjectCardProps {
   description: string
   img: string
   techstack: string[]
+  index?: number
 }
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({
@@ -20,110 +20,59 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   description,
   img,
   techstack,
+  index = 0,
 }) => {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true })
-
-  const controls = useAnimation()
-
-  useEffect(() => {
-    if (isInView) {
-      controls.start('visible')
-    }
-  }, [isInView, controls])
-
-  const projectCardVariants: Variants = {
-    hidden: {
-      y: 0,
-    },
-    visible: {
-      y: 0,
-      transition: {
-        delay: 0.4,
-        staggerChildren: 0.25,
-        staggerDirection: 1,
-        when: 'beforeChildren',
-      },
-    },
-  }
-
-  const projectCardChildVariants: Variants = {
-    hidden: { y: -30, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.8,
-        ease: 'easeOut',
-      },
-    },
-  }
-
-  const projectCardImageVariants: Variants = {
-    hidden: { width: '100%' },
-    visible: {
-      width: '0%',
-      transition: {
-        ease: 'circOut',
-        duration: 1.6,
-      },
-    },
-  }
-
   return (
-    <Link href={`/projects/${id}`}>
-      <motion.div
-        ref={ref}
-        variants={projectCardVariants}
-        initial="hidden"
-        animate={controls}
-        className="group cursor-pointer space-y-4 rounded-lg border-2 border-[var(--foreground-muted)] p-4 shadow-lg transition duration-500 ease-out hover:border-[var(--primary)]"
-      >
-        <motion.div className="relative aspect-video h-auto w-auto rounded bg-[var(--foreground-muted)]">
-          <Image
-            src={`${img}`}
-            alt={`${name} image`}
-            fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 60vw, 40vw"
-            className="aspect-video object-contain"
-          />
-          <motion.div
-            variants={projectCardImageVariants}
-            className="absolute h-full w-full bg-[var(--foreground)]"
-          />
-        </motion.div>
-        <motion.div className="space-y-4">
-          <motion.div
-            variants={projectCardChildVariants}
-            className="flex items-center justify-between"
-          >
-            <div className="whitespace-nowrap text-xl font-bold">
-              {name.length > 20 ? name.slice(0, 20) + '...' : name}
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-60px' }}
+      transition={{
+        duration: 0.7,
+        delay: (index % 3) * 0.1,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      className="h-full"
+    >
+      <Link href={`/projects/${id}`} className="group block h-full">
+        <div className="card-surface card-surface-hover flex h-full flex-col overflow-hidden rounded-2xl">
+          {/* image */}
+          <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-[var(--border)]">
+            <Image
+              src={img}
+              alt={`${name} preview`}
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+            />
+          </div>
+
+          {/* content */}
+          <div className="flex flex-1 flex-col gap-3 p-6">
+            <div className="flex items-start justify-between gap-3">
+              <h3 className="font-display text-xl font-light tracking-tight text-foreground transition-colors duration-300 group-hover:text-[var(--primary)]">
+                {name}
+              </h3>
+              <ArrowUpRightIcon className="mt-1 size-4 shrink-0 text-muted transition-all duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[var(--primary)]" />
             </div>
-            <span className="arrow">
-              <ArrowRightIcon className="social size-6 transform duration-300 ease-out will-change-transform group-hover:-rotate-45 group-hover:scale-90 group-hover:text-[var(--foreground)]" />
-            </span>
-          </motion.div>
-          <motion.div variants={projectCardChildVariants}>
-            {description.length > 70
-              ? `${description.slice(0, 70)}...`
-              : description}
-          </motion.div>
-          <motion.ul
-            variants={projectCardChildVariants}
-            className="scrollbar flex space-x-2 overflow-x-auto"
-          >
-            {techstack.map((tech) => (
-              <li
-                key={tech}
-                className="mb-4 whitespace-nowrap rounded-md border border-[var(--primary)] px-2 py-1 text-xs text-[var(--primary)]"
-              >
-                {tech}
-              </li>
-            ))}
-          </motion.ul>
-        </motion.div>
-      </motion.div>
-    </Link>
+
+            <p className="line-clamp-2 text-sm leading-relaxed text-muted">
+              {description}
+            </p>
+
+            <div className="mt-auto flex flex-wrap gap-x-4 gap-y-1 pt-3">
+              {techstack.slice(0, 4).map((tech) => (
+                <span key={tech} className="label-mono !text-muted">
+                  {tech}
+                </span>
+              ))}
+              {techstack.length > 4 && (
+                <span className="label-mono">+{techstack.length - 4}</span>
+              )}
+            </div>
+          </div>
+        </div>
+      </Link>
+    </motion.div>
   )
 }

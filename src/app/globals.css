@@ -3,22 +3,27 @@
 @tailwind utilities;
 
 :root {
-  /* --primary-100: #004e98;
-  --primary-200: #0077cc;
-  --accent-100: #eb5e28;
-  --accent-200: #ff7e3d;
-  --text-100: #f7f7f7;
-  --text-200: #ccc5b9;
-  --bg-100: #2a2a28;
-  --bg-200: #403d39; */
+  /* near-black graphite — neutral, calm, expensive */
+  --background: #0a0a0b;
+  --surface: rgba(250, 250, 252, 0.025);
+  --surface-2: rgba(250, 250, 252, 0.05);
+  --border: rgba(250, 250, 252, 0.08);
+  --border-strong: rgba(250, 250, 252, 0.16);
 
-  --primary: #3f7c85;
-  --primary-light: #00ccbf;
-  --accent: #ff5f5d;
-  --foreground: #f7f7f7;
-  --foreground-muted: #b2bebf;
-  --background: #16232e;
-  --background-muted: #747e7e;
+  --foreground: #ededf0;
+  --muted: #9d9da6;
+  --muted-2: #6b6b74;
+
+  /* champagne gold accent — the single warm note on the graphite canvas */
+  --primary: #d3b384;
+  --primary-bright: #e3c89b;
+  --accent: #d3b384;
+  --primary-soft: rgba(211, 179, 132, 0.1);
+  --glow: rgba(211, 179, 132, 0.3);
+
+  /* spotlight tints */
+  --spotlight-warm: rgba(226, 205, 168, 0.07);
+  --spotlight-cool: rgba(235, 238, 248, 0.04);
 }
 
 * {
@@ -27,161 +32,254 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   color: var(--foreground);
   background: var(--background);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  font-feature-settings: 'ss01' on, 'cv11' on;
+}
+
+::selection {
+  background: rgba(211, 179, 132, 0.3);
+  color: #fbf7ef;
+}
+
+/* GLOBAL SCROLLBAR */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(250, 250, 252, 0.12);
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(250, 250, 252, 0.22);
+  background-clip: padding-box;
 }
 
 section {
   position: relative;
-  overflow: hidden;
   width: 100%;
-  height: 100vh;
 }
 
-/* SOCIAL ANIMATION */
-.social {
-  position: relative;
+/* ---------- TYPOGRAPHY ---------- */
+
+.font-display {
+  font-family: var(--font-display), Georgia, serif;
 }
 
-.social::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  background-color: var(--foreground);
-  border-radius: 50%;
+.font-mono {
+  font-family: var(--font-mono), ui-monospace, monospace;
+}
+
+.accent-italic {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--primary);
+}
+
+.label-mono {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--muted-2);
+}
+
+/* ---------- SURFACES ---------- */
+
+.card-surface {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(8px);
+}
+
+.card-surface-hover {
   transition:
-    width 0.2s ease-in-out,
-    height 0.2s ease-in-out;
-  z-index: -2;
-  transform: translate(-50%, -50%);
+    border-color 0.5s ease,
+    background-color 0.5s ease,
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.5s ease;
 }
 
-.social:hover::before {
-  width: 99%;
-  height: 99%;
+.card-surface-hover:hover {
+  border-color: var(--border-strong);
+  background: var(--surface-2);
+  transform: translateY(-4px);
+  box-shadow: 0 24px 60px -28px rgba(0, 0, 0, 0.7);
 }
 
-/* SECTION HEADING */
-.heading {
-  position: relative;
-}
-
-.heading::before {
-  content: '';
-  position: absolute;
-  width: 60px;
-  height: 2px;
-  bottom: -10px;
-  left: 0;
-  border-radius: 50px;
-  background-color: var(--primary);
-}
-
-/* TAB ANIMATION */
-.tab {
-  position: relative;
-}
-
-.tab::before {
-  content: '';
-  position: absolute;
-  width: 20px;
+.hairline {
   height: 1px;
-  bottom: -4px;
-  left: 0;
-  border-radius: 250px;
-  background-color: var(--primary);
-}
-
-/* TAB-PANEL ANIMATION */
-
-.tab-panel {
-  position: relative;
-}
-
-.tab-panel::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  background-color: var(--accent);
-  border-radius: 8px;
-  transition:
-    width 0.3s ease-in-out,
-    height 0.3s ease-in-out;
-  z-index: 0;
-  transform: translate(-50%, -50%);
-}
-
-.tab-panel:hover::before {
   width: 100%;
-  height: 100%;
+  background: var(--border);
 }
 
-/* SCROLLBAR */
-.scrollbar {
-  scrollbar-width: thin;
-  scrollbar-color: var(--primary) #eeecec;
-}
+/* ========================================================= */
+/*  ANIMATED BACKGROUND                                       */
+/* ========================================================= */
 
-/* ARROW ANIMATION PRODUCT CARD */
-.arrow {
-  position: relative;
-}
-
-.arrow::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  background-color: var(--primary);
-  border-radius: 50%;
-  transition:
-    width 0.3s ease-in-out,
-    height 0.3s ease-in-out;
-  z-index: 0;
-  transform: translate(-50%, -50%);
-}
-
-.group:hover .arrow::before {
-  width: 150%;
-  height: 150%;
-}
-/* Timeline animations */
-.timeline-item {
-  opacity: 0;
-}
-
-.timeline-item.left-item {
-  transform: translateX(-100px);
-}
-
-.timeline-item.right-item {
-  transform: translateX(100px);
-}
-
-.timeline-item.timeline-active {
-  opacity: 1;
-  transform: translateX(0);
-  transition: all 0.8s ease-out;
-}
-
-/* Progress line */
-.timeline-progress {
+.bg-canvas {
   position: fixed;
-  top: 15%;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* single soft spotlight bleeding down from the top — static, no motion */
+.bg-spotlight {
+  position: absolute;
+  top: -30vh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140vw;
+  height: 90vh;
+  background:
+    radial-gradient(ellipse 46% 88% at 50% 0%, var(--spotlight-warm), transparent 70%),
+    radial-gradient(ellipse 80% 100% at 50% 0%, var(--spotlight-cool), transparent 72%);
+}
+
+/* razor-thin horizon line where the spotlight meets the page */
+.bg-horizon {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(720px, 80vw);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(226, 205, 168, 0.25), transparent);
+}
+
+/* ultra-faint dot grid, masked so it lives only under the spotlight */
+.bg-dot-grid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(250, 250, 252, 0.055) 1px, transparent 1px);
+  background-size: 28px 28px;
+  -webkit-mask-image: radial-gradient(ellipse 70% 55% at 50% 12%, black 10%, transparent 75%);
+  mask-image: radial-gradient(ellipse 70% 55% at 50% 12%, black 10%, transparent 75%);
+}
+
+/* vignette to keep focus toward the center */
+.bg-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 120% 90% at 50% 40%, transparent 45%, rgba(4, 4, 5, 0.55) 100%);
+}
+
+/* film grain */
+.bg-grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.4;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.045 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- CURSOR SPOTLIGHT ---------- */
+
+.cursor-glow {
+  position: fixed;
+  z-index: 2;
+  top: 0;
   left: 0;
+  height: 520px;
+  width: 520px;
+  border-radius: 9999px;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(211, 179, 132, 0.08), transparent 62%);
+  mix-blend-mode: screen;
+}
+
+/* ---------- LINKS ---------- */
+
+.link-underline {
+  position: relative;
+}
+.link-underline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  height: 1px;
   width: 100%;
-  background-color: white;
-  height: var(--scroll-percentage, 0%);
-  transition: height 0.1s ease-in;
-  z-index: 50;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.link-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ---------- MOTION HELPERS ---------- */
+
+@keyframes ping-soft {
+  0% { transform: scale(1); opacity: 0.8; }
+  80%, 100% { transform: scale(2.6); opacity: 0; }
+}
+.dot-ping::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: #8fb096;
+  animation: ping-soft 2.2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 48s linear infinite;
+}
+
+/* slow shimmer sweep for the gold accent underline on hover */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+.shimmer-text {
+  background: linear-gradient(
+    100deg,
+    var(--primary) 0%,
+    var(--primary-bright) 45%,
+    var(--primary) 60%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 6s linear infinite;
+}
+
+.fade-x {
+  -webkit-mask-image: linear-gradient(90deg, transparent, black 12%, black 88%, transparent);
+  mask-image: linear-gradient(90deg, transparent, black 12%, black 88%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

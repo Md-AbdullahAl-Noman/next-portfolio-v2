@@ -1,40 +1,60 @@
 'use client'
 
-import Link from 'next/link'
-import Image from 'next/image'
-import { usePathname } from 'next/navigation'
-import { Link as ScrollLink } from 'react-scroll'
+import { ArrowUpIcon, ArrowUpRightIcon } from '@heroicons/react/24/outline'
 
-import { socials } from './social'
-import LeafLoader from '../leaf'
-import BoxComponent from '../ui/box'
+const socials = [
+  { label: 'GitHub', href: 'https://github.com/Md-AbdullahAl-Noman' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/alnoman-se/' },
+]
 
 const Footer = () => {
-  const pathname = usePathname()
-  const isHomePage = pathname === '/'
-
   const currentYear = new Date().getFullYear()
 
+  const scrollToTop = () => {
+    document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' })
+  }
+
   return (
-    <footer className="relative flex h-[350px] flex-col items-center justify-center space-y-4 border-t border-[var(--foreground)] py-20">
-      <div className="cursor-pointer ">
-        <BoxComponent />
-      </div>
-      <div className="flex flex-row space-x-6">
-        {socials.map((social) => (
-          <div
-            key={social.name}
-            className="cursor-pointer font-bold text-neutral-400 transition-colors duration-300 ease-out hover:text-[var(--accent)]"
-          >
-            <Link href={social.href}>{social.name}</Link>
+    <footer className="border-t border-[var(--border)]">
+      <div className="mx-auto max-w-6xl px-6 py-12 sm:px-8">
+        <div className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
+          <div className="font-display text-lg tracking-tight text-foreground">
+            Al Noman<span className="text-[var(--primary)]">.</span>
           </div>
-        ))}
-      </div> 
-      <div className="text-medium text-neutral-400 mb-8" >
-        © {currentYear} • Md Abdullah Al Noman • All Rights Reserved.
-      </div>
-      <div className='absolute bottom-0 left-0 right-0 flex justify-center'>
-        <LeafLoader />
+
+          <div className="flex items-center gap-8">
+            {socials.map(({ label, href }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="link-underline inline-flex items-center gap-1.5 text-sm text-muted transition-colors duration-300 hover:text-foreground"
+              >
+                {label}
+                <ArrowUpRightIcon className="size-3.5" />
+              </a>
+            ))}
+          </div>
+
+          <button
+            onClick={scrollToTop}
+            aria-label="Back to top"
+            className="group inline-flex items-center gap-2 self-start text-muted transition-colors duration-300 hover:text-foreground md:self-auto"
+          >
+            <span className="label-mono !text-inherit">Back to top</span>
+            <ArrowUpIcon className="size-3.5 transition-transform duration-500 group-hover:-translate-y-0.5" />
+          </button>
+        </div>
+
+        <div className="mt-10 flex flex-col gap-1 border-t border-[var(--border)] pt-6 sm:flex-row sm:items-center sm:justify-between">
+          <span className="text-xs text-[var(--muted-2)]">
+            © {currentYear} Md Abdullah Al Noman. All rights reserved.
+          </span>
+          <span className="label-mono">
+            Next.js · TypeScript · Framer Motion
+          </span>
+        </div>
       </div>
     </footer>
   )
