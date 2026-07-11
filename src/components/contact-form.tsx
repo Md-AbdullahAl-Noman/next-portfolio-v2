@@ -3,11 +3,12 @@
 import { useState } from 'react'
 import * as yup from 'yup'
 import toast from 'react-hot-toast'
-import { useForm } from 'react-hook-form'
+import { useForm, type UseFormRegisterReturn } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { PaperAirplaneIcon } from '@heroicons/react/24/solid'
+import { ArrowUpRightIcon } from '@heroicons/react/24/outline'
 
 import { Button } from '@/components/ui/button'
+import { Magnetic } from '@/components/ui/magnetic'
 
 type FormData = {
   name: string
@@ -26,30 +27,69 @@ const schema = yup.object({
   message: yup.string().required('A message is required'),
 })
 
-const inputClass = (hasError: boolean) =>
-  `w-full rounded-xl border bg-white/[0.03] px-4 py-3 text-sm text-foreground placeholder-slate-500 outline-none backdrop-blur-sm transition-all duration-300 focus:bg-white/[0.05] ${
-    hasError
-      ? 'border-rose-500/60 focus:border-rose-400'
-      : 'border-[var(--border)] focus:border-cyan-400/60 focus:shadow-[0_0_0_3px_rgba(34,211,238,0.1)]'
+/* --------------------------- floating field --------------------------- */
+
+interface FloatingFieldProps {
+  id: string
+  label: string
+  type?: string
+  textarea?: boolean
+  error?: string
+  register: UseFormRegisterReturn
+}
+
+const FloatingField = ({
+  id,
+  label,
+  type = 'text',
+  textarea = false,
+  error,
+  register,
+}: FloatingFieldProps) => {
+  const shared =
+    'peer w-full border-b bg-transparent pt-6 pb-2.5 text-base text-foreground outline-none transition-colors duration-300 placeholder-transparent'
+  const border = error
+    ? 'border-rose-400/60'
+    : 'border-[var(--border-strong)]'
+
+  const labelClass = `pointer-events-none absolute left-0 top-6 origin-left text-base text-muted transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] peer-focus:top-0 peer-focus:text-[11px] peer-focus:font-mono peer-focus:uppercase peer-focus:tracking-[0.2em] peer-focus:text-[var(--primary)] peer-[:not(:placeholder-shown)]:top-0 peer-[:not(:placeholder-shown)]:text-[11px] peer-[:not(:placeholder-shown)]:font-mono peer-[:not(:placeholder-shown)]:uppercase peer-[:not(:placeholder-shown)]:tracking-[0.2em] ${
+    error ? 'peer-[:not(:placeholder-shown)]:text-rose-400/80' : 'peer-[:not(:placeholder-shown)]:text-muted'
   }`
 
-const Field = ({
-  label,
-  error,
-  children,
-}: {
-  label: string
-  error?: string
-  children: React.ReactNode
-}) => (
-  <div className="space-y-1.5">
-    <label className="font-mono text-xs uppercase tracking-[0.18em] text-slate-500">
-      {label}
-    </label>
-    {children}
-    {error && <p className="text-xs text-rose-400">{error}</p>}
-  </div>
-)
+  return (
+    <div className="group relative">
+      {textarea ? (
+        <textarea
+          {...register}
+          id={id}
+          placeholder=" "
+          rows={4}
+          className={`${shared} ${border} max-h-[260px] min-h-[110px] resize-y`}
+        />
+      ) : (
+        <input
+          {...register}
+          id={id}
+          type={type}
+          placeholder=" "
+          className={`${shared} ${border}`}
+        />
+      )}
+      <label htmlFor={id} className={labelClass}>
+        {label}
+      </label>
+      {/* gold underline that draws in on focus */}
+      <span className="absolute bottom-0 left-0 h-px w-full origin-left scale-x-0 bg-[var(--primary)] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] peer-focus:scale-x-100" />
+      {error && (
+        <p className="mt-2 font-mono text-[11px] tracking-wide text-rose-400/90">
+          {error}
+        </p>
+      )}
+    </div>
+  )
+}
+
+/* ------------------------------- form ------------------------------- */
 
 const ContactForm = () => {
   const [sending, setSending] = useState(false)
@@ -83,48 +123,44 @@ const ContactForm = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="w-full space-y-5">
-      <div className="grid gap-5 sm:grid-cols-2">
-        <Field label="Name" error={errors.name?.message}>
-          <input
-            {...register('name')}
-            placeholder="Jane Doe"
-            type="text"
-            className={inputClass(!!errors.name)}
-          />
-        </Field>
-        <Field label="Email" error={errors.email?.message}>
-          <input
-            {...register('email')}
-            placeholder="jane@company.com"
-            type="email"
-            className={inputClass(!!errors.email)}
-          />
-        </Field>
+    <form onSubmit={handleSubmit(onSubmit)} className="w-full space-y-9">
+      <div className="grid gap-9 sm:grid-cols-2">
+        <FloatingField
+          id="name"
+          label="Your name"
+          error={errors.name?.message}
+          register={register('name')}
+        />
+        <FloatingField
+          id="email"
+          label="Email address"
+          type="email"
+          error={errors.email?.message}
+          register={register('email')}
+        />
       </div>
 
-      <Field label="Subject" error={errors.subject?.message}>
-        <input
-          {...register('subject')}
-          placeholder="Let's talk about..."
-          type="text"
-          className={inputClass(!!errors.subject)}
-        />
-      </Field>
+      <FloatingField
+        id="subject"
+        label="Subject"
+        error={errors.subject?.message}
+        register={register('subject')}
+      />
 
-      <Field label="Message" error={errors.message?.message}>
-        <textarea
-          {...register('message')}
-          placeholder="Tell me about your project, idea, or opportunity..."
-          rows={5}
-          className={`${inputClass(!!errors.message)} max-h-[280px] min-h-[120px] resize-y`}
-        />
-      </Field>
+      <FloatingField
+        id="message"
+        label="Tell me about your project or idea"
+        textarea
+        error={errors.message?.message}
+        register={register('message')}
+      />
 
-      <Button type="submit" disabled={sending} className="w-full sm:w-auto">
-        {sending ? 'Sending...' : 'Send message'}
-        <PaperAirplaneIcon className="size-4 transition-transform duration-300 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-0.5" />
-      </Button>
+      <Magnetic strength={0.25} className="inline-block">
+        <Button type="submit" disabled={sending} className="w-full sm:w-auto">
+          {sending ? 'Sending...' : 'Send message'}
+          <ArrowUpRightIcon className="size-4 transition-transform duration-500 group-hover/btn:-translate-y-0.5 group-hover/btn:translate-x-0.5" />
+        </Button>
+      </Magnetic>
     </form>
   )
 }

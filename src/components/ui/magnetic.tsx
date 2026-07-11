@@ -2,7 +2,6 @@
 
 import { useRef } from 'react'
 import { motion, useMotionValue, useSpring } from 'framer-motion'
-import { cn } from '@/lib/utils'
 
 interface MagneticProps {
   children: React.ReactNode
@@ -10,25 +9,33 @@ interface MagneticProps {
   className?: string
 }
 
-/** Elements gently pull toward the cursor and spring back on leave. */
+/**
+ * Wraps children so they drift toward the cursor while hovered, then spring
+ * back on leave. Skips fine-pointer detection intentionally — on touch there
+ * is no hover, so the effect is simply never triggered.
+ */
 export const Magnetic = ({
   children,
-  strength = 0.35,
+  strength = 0.4,
   className,
 }: MagneticProps) => {
   const ref = useRef<HTMLDivElement>(null)
-  const x = useSpring(useMotionValue(0), { stiffness: 220, damping: 16 })
-  const y = useSpring(useMotionValue(0), { stiffness: 220, damping: 16 })
+  const x = useMotionValue(0)
+  const y = useMotionValue(0)
+  const sx = useSpring(x, { stiffness: 220, damping: 18, mass: 0.4 })
+  const sy = useSpring(y, { stiffness: 220, damping: 18, mass: 0.4 })
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const el = ref.current
     if (!el) return
     const rect = el.getBoundingClientRect()
-    x.set((e.clientX - rect.left - rect.width / 2) * strength)
-    y.set((e.clientY - rect.top - rect.height / 2) * strength)
+    const relX = e.clientX - (rect.left + rect.width / 2)
+    const relY = e.clientY - (rect.top + rect.height / 2)
+    x.set(relX * strength)
+    y.set(relY * strength)
   }
 
-  const handleMouseLeave = () => {
+  const reset = () => {
     x.set(0)
     y.set(0)
   }
@@ -36,10 +43,10 @@ export const Magnetic = ({
   return (
     <motion.div
       ref={ref}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={{ x, y }}
-      className={cn('inline-block', className)}
+      onMouseMove={handleMove}
+      onMouseLeave={reset}
+      style={{ x: sx, y: sy }}
+      className={className}
     >
       {children}
     </motion.div>

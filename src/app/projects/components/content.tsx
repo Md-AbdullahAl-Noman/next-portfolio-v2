@@ -2,9 +2,8 @@
 
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { ChevronLeftIcon } from '@heroicons/react/24/solid'
+import { ArrowLeftIcon } from '@heroicons/react/24/outline'
 
-import { Button } from '@/components/ui/button'
 import { ProjectCard } from '@/components/ui/project-card'
 import SectionHeading from '@/components/ui/section-heading'
 
@@ -14,30 +13,31 @@ const ProjectContent = () => {
   return (
     <div className="flex flex-col space-y-14 py-24">
       <motion.div
-        initial={{ opacity: 0, x: -20 }}
+        initial={{ opacity: 0, x: -16 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6 }}
       >
-        <Link href="/">
-          <Button variant="outline">
-            <ChevronLeftIcon className="size-4" />
-            Back home
-          </Button>
+        <Link
+          href="/"
+          className="link-underline inline-flex items-center gap-2 text-sm text-muted transition-colors duration-300 hover:text-foreground"
+        >
+          <ArrowLeftIcon className="size-3.5" />
+          Back home
         </Link>
       </motion.div>
 
       <SectionHeading
-        index="//"
+        index="→"
         eyebrow="Archive"
         title={
           <>
-            All <span className="text-gradient">projects</span>
+            All <span className="accent-italic">projects</span>
           </>
         }
         description="The full collection — client work, platforms, and experiments."
       />
 
-      <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {projects.map((project, index) => (
           <ProjectCard
             key={project.id}

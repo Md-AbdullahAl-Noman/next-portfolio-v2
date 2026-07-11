@@ -1,33 +1,37 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { motion, useMotionValue, useSpring } from 'framer-motion'
 
-/** Soft light that trails the cursor across the whole page (desktop only). */
+/**
+ * A soft champagne spotlight that trails the cursor with a gentle spring.
+ * Desktop / fine-pointer only, and disabled under reduced-motion.
+ */
 const CursorGlow = () => {
-  const x = useMotionValue(-600)
-  const y = useMotionValue(-600)
-  const springX = useSpring(x, { stiffness: 90, damping: 20, mass: 0.6 })
-  const springY = useSpring(y, { stiffness: 90, damping: 20, mass: 0.6 })
+  const [enabled, setEnabled] = useState(false)
+
+  const x = useMotionValue(-1000)
+  const y = useMotionValue(-1000)
+  const sx = useSpring(x, { stiffness: 120, damping: 22, mass: 0.6 })
+  const sy = useSpring(y, { stiffness: 120, damping: 22, mass: 0.6 })
 
   useEffect(() => {
+    const finePointer = window.matchMedia('(pointer: fine)').matches
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (!finePointer || reduced) return
+
+    setEnabled(true)
     const move = (e: MouseEvent) => {
-      x.set(e.clientX)
-      y.set(e.clientY)
+      x.set(e.clientX - 260)
+      y.set(e.clientY - 260)
     }
     window.addEventListener('mousemove', move)
     return () => window.removeEventListener('mousemove', move)
   }, [x, y])
 
-  return (
-    <motion.div
-      aria-hidden
-      style={{ left: springX, top: springY, x: '-50%', y: '-50%' }}
-      className="pointer-events-none fixed z-30 hidden mix-blend-screen md:block"
-    >
-      <div className="h-[560px] w-[560px] rounded-full bg-[radial-gradient(circle,rgba(34,211,238,0.07)_0%,rgba(129,140,248,0.04)_35%,transparent_65%)]" />
-    </motion.div>
-  )
+  if (!enabled) return null
+
+  return <motion.div className="cursor-glow" style={{ x: sx, y: sy }} aria-hidden />
 }
 
 export default CursorGlow

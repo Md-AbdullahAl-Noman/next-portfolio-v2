@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 
+import AnimatedBackground from '@/components/animated-background'
+import CursorGlow from '@/components/cursor-glow'
 import Footer from '@/components/navigation/footer'
 
 export const metadata: Metadata = {
@@ -12,9 +14,13 @@ export default function ProjectLayout({
   children: React.ReactNode
 }>) {
   return (
-    <div>
-      {children}
-      <Footer />
+    <div className="relative bg-background text-foreground">
+      <AnimatedBackground />
+      <CursorGlow />
+      <div className="relative z-10">
+        {children}
+        <Footer />
+      </div>
     </div>
   )
 }

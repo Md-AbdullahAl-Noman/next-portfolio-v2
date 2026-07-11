@@ -21,14 +21,14 @@ export const Button: React.FC<ButtonProps> = ({
   disabled,
 }) => {
   const base =
-    'group/btn relative inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold tracking-wide transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[#050811] disabled:cursor-not-allowed disabled:opacity-50 active:scale-[0.97]'
+    'group/btn relative inline-flex items-center justify-center gap-2.5 overflow-hidden rounded-full px-7 py-3.5 text-sm font-medium tracking-wide transition-all duration-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0b] disabled:cursor-not-allowed disabled:opacity-50 active:scale-[0.98]'
 
   const variants = {
     solid:
-      'btn-shine bg-gradient-to-r from-cyan-400 to-sky-500 text-slate-950 shadow-[0_8px_30px_-10px_rgba(34,211,238,0.6)] hover:shadow-[0_12px_40px_-8px_rgba(34,211,238,0.7)] hover:brightness-110',
+      'bg-foreground text-[#0a0a0b] hover:text-[#0a0a0b]',
     outline:
-      'border border-[var(--border-strong)] bg-white/[0.02] text-foreground backdrop-blur-sm hover:border-cyan-400/60 hover:bg-cyan-400/5 hover:text-cyan-300',
-    ghost: 'text-muted hover:bg-white/5 hover:text-foreground',
+      'border border-[var(--border-strong)] text-foreground hover:border-[var(--primary)] hover:text-[var(--primary)]',
+    ghost: 'text-muted hover:text-foreground',
   }
 
   return (
@@ -38,7 +38,13 @@ export const Button: React.FC<ButtonProps> = ({
       disabled={disabled}
       className={cn(base, variants[variant], className)}
     >
-      {children}
+      {/* gold wash that slides in on hover for the solid variant */}
+      {variant === 'solid' && (
+        <span className="absolute inset-0 -z-0 translate-y-full bg-[var(--primary)] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/btn:translate-y-0" />
+      )}
+      <span className="relative z-10 inline-flex items-center gap-2.5">
+        {children}
+      </span>
     </button>
   )
 }
