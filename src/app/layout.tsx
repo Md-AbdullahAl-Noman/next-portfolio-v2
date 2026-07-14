@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Fraunces, Inter, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 
+import Terminal from '@/components/terminal'
 import { ToastProvider } from '@/providers/toast-provider'
 
 const sans = Inter({
@@ -83,13 +84,14 @@ export default function RootLayout({
           href="/favicons/apple-touch-icon.png"
         />
         <link rel="manifest" href="/favicons/site.webmanifest" />
-        <meta name="theme-color" content="#0a0a0b" />
+        <meta name="theme-color" content="#0f1420" />
       </head>
       <body
         className={`${sans.variable} ${displayFont.variable} ${mono.variable} font-sans`}
       >
         <ToastProvider />
         {children}
+        <Terminal />
       </body>
     </html>
   )

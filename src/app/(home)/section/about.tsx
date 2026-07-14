@@ -4,6 +4,7 @@ import { motion, type Variants } from 'framer-motion'
 import Image from 'next/image'
 
 import SectionHeading from '@/components/ui/section-heading'
+import { Tilt } from '@/components/ui/tilt'
 
 const container: Variants = {
   hidden: {},
@@ -48,16 +49,18 @@ const About = () => {
           transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
           className="relative mx-auto w-full max-w-[380px] md:mx-0"
         >
-          <div className="card-surface relative aspect-[4/5] w-full overflow-hidden rounded-2xl">
-            <Image
-              src="/main-photo.png"
-              alt="Md Abdullah Al Noman"
-              fill
-              priority
-              sizes="(max-width: 768px) 100vw, 35vw"
-              className="object-cover object-top transition-transform duration-700 hover:scale-[1.02]"
-            />
-          </div>
+          <Tilt max={4}>
+            <div className="card-surface relative aspect-[4/5] w-full overflow-hidden rounded-2xl">
+              <Image
+                src="/main-photo.png"
+                alt="Md Abdullah Al Noman"
+                fill
+                priority
+                sizes="(max-width: 768px) 100vw, 35vw"
+                className="object-cover object-top transition-transform duration-700 hover:scale-[1.02]"
+              />
+            </div>
+          </Tilt>
           <div className="mt-4 flex items-center justify-between">
             <span className="label-mono">Md Abdullah Al Noman</span>
             <span className="label-mono text-[var(--primary)]">Est. 2021</span>
