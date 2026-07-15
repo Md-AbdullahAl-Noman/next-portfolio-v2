@@ -1,11 +1,37 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import { ArrowUpIcon, ArrowUpRightIcon } from '@heroicons/react/24/outline'
 
 const socials = [
   { label: 'GitHub', href: 'https://github.com/Md-AbdullahAl-Noman' },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/alnoman-se/' },
 ]
+
+/** Live clock in Dhaka time — the "where I am right now" signature. */
+const LocalTime = () => {
+  const [time, setTime] = useState('')
+
+  useEffect(() => {
+    const tick = () =>
+      setTime(
+        new Date().toLocaleTimeString('en-US', {
+          timeZone: 'Asia/Dhaka',
+          hour: '2-digit',
+          minute: '2-digit',
+        }),
+      )
+    tick()
+    const id = setInterval(tick, 30_000)
+    return () => clearInterval(id)
+  }, [])
+
+  return (
+    <span className="label-mono tabular-nums">
+      Dhaka, BD — {time || '--:--'}
+    </span>
+  )
+}
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
@@ -15,7 +41,7 @@ const Footer = () => {
   }
 
   return (
-    <footer className="border-t border-[var(--border)]">
+    <footer className="relative overflow-hidden border-t border-[var(--border)]">
       <div className="mx-auto max-w-6xl px-6 py-12 sm:px-8">
         <div className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
           <div className="font-display text-lg tracking-tight text-foreground">
@@ -51,9 +77,15 @@ const Footer = () => {
           <span className="text-xs text-[var(--muted-2)]">
             © {currentYear} Md Abdullah Al Noman. All rights reserved.
           </span>
-          <span className="label-mono">
-            Next.js · TypeScript · Framer Motion
-          </span>
+          <LocalTime />
+        </div>
+
+        {/* giant ghost wordmark */}
+        <div
+          aria-hidden
+          className="ghost-stroke pointer-events-none -mb-6 mt-12 whitespace-nowrap text-center font-display text-[15vw] font-light leading-[0.85] tracking-tight sm:-mb-10"
+        >
+          AL NOMAN
         </div>
       </div>
     </footer>

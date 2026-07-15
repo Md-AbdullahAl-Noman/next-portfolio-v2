@@ -21,11 +21,11 @@ export const Button: React.FC<ButtonProps> = ({
   disabled,
 }) => {
   const base =
-    'group/btn relative inline-flex items-center justify-center gap-2.5 overflow-hidden rounded-full px-7 py-3.5 text-sm font-medium tracking-wide transition-all duration-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0b] disabled:cursor-not-allowed disabled:opacity-50 active:scale-[0.98]'
+    'group/btn relative inline-flex items-center justify-center gap-2.5 overflow-hidden rounded-full px-7 py-3.5 text-sm font-medium tracking-wide transition-all duration-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0f1420] disabled:cursor-not-allowed disabled:opacity-50 active:scale-[0.98]'
 
   const variants = {
     solid:
-      'bg-foreground text-[#0a0a0b] hover:text-[#0a0a0b]',
+      'bg-foreground text-[#0f1420] hover:text-[#0f1420]',
     outline:
       'border border-[var(--border-strong)] text-foreground hover:border-[var(--primary)] hover:text-[var(--primary)]',
     ghost: 'text-muted hover:text-foreground',

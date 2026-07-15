@@ -7,16 +7,20 @@ import Skills from './section/skills'
 
 import AnimatedBackground from '@/components/animated-background'
 import CursorGlow from '@/components/cursor-glow'
+import CustomCursor from '@/components/custom-cursor'
 import Footer from '@/components/navigation/footer'
 import NavigationTab from '@/components/navigation/nav-tab'
+import Preloader from '@/components/preloader'
 import TechMarquee from '@/components/tech-marquee'
 import { Container } from '@/components/ui/container'
 
 export default function Home() {
   return (
     <main className="relative bg-background text-foreground">
+      <Preloader />
       <AnimatedBackground />
       <CursorGlow />
+      <CustomCursor />
       <NavigationTab />
 
       <div className="relative z-10">

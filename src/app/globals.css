@@ -3,18 +3,18 @@
 @tailwind utilities;
 
 :root {
-  /* near-black graphite — neutral, calm, expensive */
-  --background: #0a0a0b;
-  --surface: rgba(250, 250, 252, 0.025);
-  --surface-2: rgba(250, 250, 252, 0.05);
-  --border: rgba(250, 250, 252, 0.08);
-  --border-strong: rgba(250, 250, 252, 0.16);
+  /* deep ink navy — cool, moody, makes the gold pop */
+  --background: #0f1420;
+  --surface: rgba(230, 238, 255, 0.03);
+  --surface-2: rgba(230, 238, 255, 0.06);
+  --border: rgba(230, 238, 255, 0.09);
+  --border-strong: rgba(230, 238, 255, 0.17);
 
-  --foreground: #ededf0;
-  --muted: #9d9da6;
-  --muted-2: #6b6b74;
+  --foreground: #e6eaf2;
+  --muted: #98a0b0;
+  --muted-2: #656d7e;
 
-  /* champagne gold accent — the single warm note on the graphite canvas */
+  /* champagne gold accent — the single warm note on the ink canvas */
   --primary: #d3b384;
   --primary-bright: #e3c89b;
   --accent: #d3b384;
@@ -23,7 +23,7 @@
 
   /* spotlight tints */
   --spotlight-warm: rgba(226, 205, 168, 0.07);
-  --spotlight-cool: rgba(235, 238, 248, 0.04);
+  --spotlight-cool: rgba(150, 180, 255, 0.05);
 }
 
 * {
@@ -48,6 +48,17 @@ body {
 ::selection {
   background: rgba(211, 179, 132, 0.3);
   color: #fbf7ef;
+}
+
+/* bespoke cursor active: hide native pointer, keep text caret in fields */
+.cursor-none,
+.cursor-none * {
+  cursor: none !important;
+}
+.cursor-none input,
+.cursor-none textarea,
+.cursor-none select {
+  cursor: text !important;
 }
 
 /* GLOBAL SCROLLBAR */
@@ -173,11 +184,80 @@ section {
   mask-image: radial-gradient(ellipse 70% 55% at 50% 12%, black 10%, transparent 75%);
 }
 
+/* slow champagne aurora drifting behind the spotlight */
+.bg-aurora {
+  position: absolute;
+  top: -18vh;
+  left: 50%;
+  width: 95vw;
+  height: 75vh;
+  background: radial-gradient(
+    ellipse 38% 55% at 50% 45%,
+    rgba(211, 179, 132, 0.055),
+    transparent 70%
+  );
+  animation: aurora-drift 28s ease-in-out infinite alternate;
+  will-change: transform;
+}
+@keyframes aurora-drift {
+  from { transform: translateX(-68%) rotate(-5deg) scale(1); }
+  to { transform: translateX(-32%) rotate(5deg) scale(1.12); }
+}
+
+/* ---------- HERO AURORA BEAMS ---------- */
+/* slow diagonal light beams sweeping the hero — soft, blurred, cinematic */
+.hero-beams {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.hero-beam {
+  position: absolute;
+  top: -40%;
+  height: 180%;
+  width: 24vw;
+  filter: blur(70px);
+  mix-blend-mode: screen;
+  will-change: transform, opacity;
+}
+.hero-beam-1 {
+  left: 6%;
+  background: linear-gradient(to bottom, transparent, rgba(211, 179, 132, 0.4), transparent);
+  animation: beam-1 15s ease-in-out infinite alternate;
+}
+.hero-beam-2 {
+  left: 36%;
+  width: 18vw;
+  background: linear-gradient(to bottom, transparent, rgba(235, 238, 248, 0.2), transparent);
+  animation: beam-2 21s ease-in-out infinite alternate;
+}
+.hero-beam-3 {
+  left: 64%;
+  background: linear-gradient(to bottom, transparent, rgba(211, 179, 132, 0.3), transparent);
+  animation: beam-3 18s ease-in-out infinite alternate;
+}
+@keyframes beam-1 {
+  from { transform: translateX(-7vw) rotate(20deg); opacity: 0.35; }
+  to { transform: translateX(7vw) rotate(15deg); opacity: 0.7; }
+}
+@keyframes beam-2 {
+  from { transform: translateX(6vw) rotate(16deg); opacity: 0.25; }
+  to { transform: translateX(-6vw) rotate(21deg); opacity: 0.5; }
+}
+@keyframes beam-3 {
+  from { transform: translateX(-5vw) rotate(22deg); opacity: 0.5; }
+  to { transform: translateX(8vw) rotate(17deg); opacity: 0.25; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-beam { animation: none; opacity: 0.4; }
+}
+
 /* vignette to keep focus toward the center */
 .bg-vignette {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 120% 90% at 50% 40%, transparent 45%, rgba(4, 4, 5, 0.55) 100%);
+  background: radial-gradient(ellipse 120% 90% at 50% 40%, transparent 45%, rgba(5, 8, 15, 0.55) 100%);
 }
 
 /* film grain */
@@ -264,6 +344,13 @@ section {
   background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: shimmer 6s linear infinite;
+}
+
+/* outlined ghost type — footer wordmark & section index numerals */
+.ghost-stroke {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(211, 179, 132, 0.16);
+  user-select: none;
 }
 
 .fade-x {

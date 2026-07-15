@@ -27,11 +27,19 @@ export const SectionHeading = ({
       viewport={{ once: true, margin: '-80px' }}
       transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
       className={cn(
-        'flex flex-col gap-6',
+        'relative flex flex-col gap-6',
         align === 'center' ? 'items-center text-center' : 'items-start',
         className,
       )}
     >
+      {align === 'left' && (
+        <span
+          aria-hidden
+          className="ghost-stroke pointer-events-none absolute -top-10 right-0 hidden font-display text-[9rem] font-light leading-none md:block"
+        >
+          {index}
+        </span>
+      )}
       <div
         className={cn(
           'flex w-full items-center gap-4',

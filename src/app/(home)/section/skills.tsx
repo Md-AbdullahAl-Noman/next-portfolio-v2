@@ -15,11 +15,31 @@ const GROUPS: { key: string; label: string }[] = [
 ]
 
 const rowVariants: Variants = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.06, delayChildren: 0.05 } },
+}
+
+const labelVariant: Variants = {
+  hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
+  },
+}
+
+const chipsContainer: Variants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.035 } },
+}
+
+const chipVariant: Variants = {
+  hidden: { opacity: 0, y: 14, scale: 0.9 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] },
   },
 }
 
@@ -51,28 +71,35 @@ const Skills = () => {
               viewport={{ once: true, margin: '-60px' }}
               className="grid gap-3 border-t border-[var(--border)] py-8 md:grid-cols-[200px_1fr] md:gap-12"
             >
-              <div className="flex items-baseline gap-2 pt-1">
+              <motion.div
+                variants={labelVariant}
+                className="flex items-baseline gap-2 pt-1"
+              >
                 <span className="label-mono">{label}</span>
                 <span className="font-mono text-[11px] text-[var(--primary)]">
                   {String(items.length).padStart(2, '0')}
                 </span>
-              </div>
-              <div className="flex flex-wrap gap-x-2.5 gap-y-3">
+              </motion.div>
+              <motion.div
+                variants={chipsContainer}
+                className="flex flex-wrap gap-x-2.5 gap-y-3"
+              >
                 {items.map((skill) => {
                   const Icon = skill.icon
                   return (
-                    <span
+                    <motion.span
                       key={skill.name}
+                      variants={chipVariant}
                       className="group inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--surface)] px-4 py-2 text-sm text-muted transition-all duration-300 hover:-translate-y-0.5 hover:border-[var(--primary)]/40 hover:bg-[var(--surface-2)] hover:text-foreground"
                     >
                       {Icon && (
                         <Icon className="size-3.5 text-[var(--muted-2)] transition-colors duration-300 group-hover:text-[var(--primary)]" />
                       )}
                       {skill.name}
-                    </span>
+                    </motion.span>
                   )
                 })}
-              </div>
+              </motion.div>
             </motion.div>
           )
         })}
