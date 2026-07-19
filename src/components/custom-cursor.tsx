@@ -71,8 +71,8 @@ const CustomCursor = () => {
           marginLeft: -ringSize / 2,
           marginTop: -ringSize / 2,
           backgroundColor: hovering
-            ? 'rgba(211, 179, 132, 0.1)'
-            : 'rgba(211, 179, 132, 0)',
+            ? 'rgba(129, 140, 248, 0.12)'
+            : 'rgba(129, 140, 248, 0)',
         }}
         transition={{ type: 'spring', stiffness: 300, damping: 24 }}
         className="pointer-events-none fixed left-0 top-0 z-[90] flex items-center justify-center rounded-full border border-[var(--primary)] backdrop-blur-[1px]"

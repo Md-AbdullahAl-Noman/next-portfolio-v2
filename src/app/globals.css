@@ -3,27 +3,28 @@
 @tailwind utilities;
 
 :root {
-  /* deep ink navy — cool, moody, makes the gold pop */
-  --background: #0f1420;
-  --surface: rgba(230, 238, 255, 0.03);
-  --surface-2: rgba(230, 238, 255, 0.06);
-  --border: rgba(230, 238, 255, 0.09);
-  --border-strong: rgba(230, 238, 255, 0.17);
+  /* midnight volt — near-black canvas with a cool blue tint */
+  --background: #05070f;
+  --surface: rgba(165, 180, 252, 0.03);
+  --surface-2: rgba(165, 180, 252, 0.06);
+  --border: rgba(165, 180, 252, 0.09);
+  --border-strong: rgba(165, 180, 252, 0.18);
 
-  --foreground: #e6eaf2;
-  --muted: #98a0b0;
-  --muted-2: #656d7e;
+  --foreground: #e9edf7;
+  --muted: #8b93a7;
+  --muted-2: #5b6373;
 
-  /* champagne gold accent — the single warm note on the ink canvas */
-  --primary: #d3b384;
-  --primary-bright: #e3c89b;
-  --accent: #d3b384;
-  --primary-soft: rgba(211, 179, 132, 0.1);
-  --glow: rgba(211, 179, 132, 0.3);
+  /* electric indigo → cyan — the signature gradient */
+  --primary: #818cf8;
+  --primary-bright: #a5b4fc;
+  --accent: #22d3ee;
+  --primary-soft: rgba(129, 140, 248, 0.1);
+  --glow: rgba(99, 102, 241, 0.35);
 
-  /* spotlight tints */
-  --spotlight-warm: rgba(226, 205, 168, 0.07);
-  --spotlight-cool: rgba(150, 180, 255, 0.05);
+  /* aurora orb tints */
+  --orb-indigo: rgba(99, 102, 241, 0.16);
+  --orb-violet: rgba(167, 139, 250, 0.12);
+  --orb-cyan: rgba(34, 211, 238, 0.1);
 }
 
 * {
@@ -46,8 +47,8 @@ body {
 }
 
 ::selection {
-  background: rgba(211, 179, 132, 0.3);
-  color: #fbf7ef;
+  background: rgba(129, 140, 248, 0.35);
+  color: #f4f6fd;
 }
 
 /* bespoke cursor active: hide native pointer, keep text caret in fields */
@@ -76,7 +77,7 @@ body {
   background-clip: padding-box;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(250, 250, 252, 0.22);
+  background: rgba(129, 140, 248, 0.35);
   background-clip: padding-box;
 }
 
@@ -88,17 +89,19 @@ section {
 /* ---------- TYPOGRAPHY ---------- */
 
 .font-display {
-  font-family: var(--font-display), Georgia, serif;
+  font-family: var(--font-display), system-ui, sans-serif;
 }
 
 .font-mono {
   font-family: var(--font-mono), ui-monospace, monospace;
 }
 
+/* gradient accent word — static indigo → cyan */
 .accent-italic {
-  font-style: italic;
-  font-weight: 400;
-  color: var(--primary);
+  background: linear-gradient(100deg, var(--primary) 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .label-mono {
@@ -129,7 +132,9 @@ section {
   border-color: var(--border-strong);
   background: var(--surface-2);
   transform: translateY(-4px);
-  box-shadow: 0 24px 60px -28px rgba(0, 0, 0, 0.7);
+  box-shadow:
+    0 24px 60px -28px rgba(0, 0, 0, 0.7),
+    0 0 44px -12px var(--glow);
 }
 
 .hairline {
@@ -150,58 +155,62 @@ section {
   pointer-events: none;
 }
 
-/* single soft spotlight bleeding down from the top — static, no motion */
-.bg-spotlight {
+/* electric aurora — three blurred orbs drifting slowly behind the content */
+.bg-orb {
   position: absolute;
-  top: -30vh;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 140vw;
-  height: 90vh;
-  background:
-    radial-gradient(ellipse 46% 88% at 50% 0%, var(--spotlight-warm), transparent 70%),
-    radial-gradient(ellipse 80% 100% at 50% 0%, var(--spotlight-cool), transparent 72%);
+  border-radius: 9999px;
+  filter: blur(90px);
+  mix-blend-mode: screen;
+  will-change: transform;
+}
+.bg-orb-1 {
+  top: -22vh;
+  left: -12vw;
+  width: 58vw;
+  height: 58vw;
+  background: radial-gradient(circle at center, var(--orb-indigo), transparent 68%);
+  animation: orb-1 32s ease-in-out infinite alternate;
+}
+.bg-orb-2 {
+  top: 8vh;
+  right: -18vw;
+  width: 52vw;
+  height: 52vw;
+  background: radial-gradient(circle at center, var(--orb-violet), transparent 68%);
+  animation: orb-2 38s ease-in-out infinite alternate;
+}
+.bg-orb-3 {
+  bottom: -28vh;
+  left: 22vw;
+  width: 62vw;
+  height: 62vw;
+  background: radial-gradient(circle at center, var(--orb-cyan), transparent 68%);
+  animation: orb-3 44s ease-in-out infinite alternate;
+}
+@keyframes orb-1 {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(9vw, 7vh) scale(1.15); }
+}
+@keyframes orb-2 {
+  from { transform: translate(0, 0) scale(1.1); }
+  to { transform: translate(-8vw, 10vh) scale(0.95); }
+}
+@keyframes orb-3 {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(-7vw, -8vh) scale(1.12); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bg-orb { animation: none; }
 }
 
-/* razor-thin horizon line where the spotlight meets the page */
-.bg-horizon {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(720px, 80vw);
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(226, 205, 168, 0.25), transparent);
-}
-
-/* ultra-faint dot grid, masked so it lives only under the spotlight */
+/* ultra-faint dot grid, masked so it lives mainly toward the top */
 .bg-dot-grid {
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(rgba(250, 250, 252, 0.055) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(165, 180, 252, 0.055) 1px, transparent 1px);
   background-size: 28px 28px;
   -webkit-mask-image: radial-gradient(ellipse 70% 55% at 50% 12%, black 10%, transparent 75%);
   mask-image: radial-gradient(ellipse 70% 55% at 50% 12%, black 10%, transparent 75%);
-}
-
-/* slow champagne aurora drifting behind the spotlight */
-.bg-aurora {
-  position: absolute;
-  top: -18vh;
-  left: 50%;
-  width: 95vw;
-  height: 75vh;
-  background: radial-gradient(
-    ellipse 38% 55% at 50% 45%,
-    rgba(211, 179, 132, 0.055),
-    transparent 70%
-  );
-  animation: aurora-drift 28s ease-in-out infinite alternate;
-  will-change: transform;
-}
-@keyframes aurora-drift {
-  from { transform: translateX(-68%) rotate(-5deg) scale(1); }
-  to { transform: translateX(-32%) rotate(5deg) scale(1.12); }
 }
 
 /* ---------- HERO AURORA BEAMS ---------- */
@@ -223,18 +232,18 @@ section {
 }
 .hero-beam-1 {
   left: 6%;
-  background: linear-gradient(to bottom, transparent, rgba(211, 179, 132, 0.4), transparent);
+  background: linear-gradient(to bottom, transparent, rgba(129, 140, 248, 0.35), transparent);
   animation: beam-1 15s ease-in-out infinite alternate;
 }
 .hero-beam-2 {
   left: 36%;
   width: 18vw;
-  background: linear-gradient(to bottom, transparent, rgba(235, 238, 248, 0.2), transparent);
+  background: linear-gradient(to bottom, transparent, rgba(34, 211, 238, 0.18), transparent);
   animation: beam-2 21s ease-in-out infinite alternate;
 }
 .hero-beam-3 {
   left: 64%;
-  background: linear-gradient(to bottom, transparent, rgba(211, 179, 132, 0.3), transparent);
+  background: linear-gradient(to bottom, transparent, rgba(167, 139, 250, 0.28), transparent);
   animation: beam-3 18s ease-in-out infinite alternate;
 }
 @keyframes beam-1 {
@@ -257,7 +266,7 @@ section {
 .bg-vignette {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 120% 90% at 50% 40%, transparent 45%, rgba(5, 8, 15, 0.55) 100%);
+  background: radial-gradient(ellipse 120% 90% at 50% 40%, transparent 45%, rgba(2, 4, 10, 0.55) 100%);
 }
 
 /* film grain */
@@ -279,7 +288,7 @@ section {
   width: 520px;
   border-radius: 9999px;
   pointer-events: none;
-  background: radial-gradient(circle, rgba(211, 179, 132, 0.08), transparent 62%);
+  background: radial-gradient(circle, rgba(129, 140, 248, 0.1), transparent 62%);
   mix-blend-mode: screen;
 }
 
@@ -327,7 +336,7 @@ section {
   animation: marquee 48s linear infinite;
 }
 
-/* slow shimmer sweep for the gold accent underline on hover */
+/* slow shimmer sweep for the gradient accent words */
 @keyframes shimmer {
   0% { background-position: -200% center; }
   100% { background-position: 200% center; }
@@ -336,8 +345,9 @@ section {
   background: linear-gradient(
     100deg,
     var(--primary) 0%,
-    var(--primary-bright) 45%,
-    var(--primary) 60%
+    var(--accent) 45%,
+    var(--primary-bright) 60%,
+    var(--primary) 100%
   );
   background-size: 200% auto;
   -webkit-background-clip: text;
@@ -349,7 +359,7 @@ section {
 /* outlined ghost type — footer wordmark & section index numerals */
 .ghost-stroke {
   color: transparent;
-  -webkit-text-stroke: 1px rgba(211, 179, 132, 0.16);
+  -webkit-text-stroke: 1px rgba(129, 140, 248, 0.16);
   user-select: none;
 }
 

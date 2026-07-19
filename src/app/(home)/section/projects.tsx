@@ -45,7 +45,7 @@ const StackCard = ({
         className="relative w-full origin-top will-change-transform"
       >
         <div className="group block">
-          <div className="grid overflow-hidden rounded-[1.75rem] border border-[var(--border-strong)] bg-[#151b29] shadow-[0_50px_140px_-50px_rgba(0,0,0,0.95)] md:grid-cols-2">
+          <div className="grid overflow-hidden rounded-[1.75rem] border border-[var(--border-strong)] bg-[#0a0e1c] shadow-[0_50px_140px_-50px_rgba(0,0,0,0.95)] md:grid-cols-2">
             {/* live preview */}
             <div
               className={`relative aspect-[16/11] overflow-hidden md:aspect-auto md:min-h-[440px] ${
