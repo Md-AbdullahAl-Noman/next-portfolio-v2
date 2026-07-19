@@ -42,7 +42,7 @@ export default function LivePreview({
         sizes="(max-width: 768px) 100vw, 50vw"
         className="object-cover object-top transition-transform duration-[900ms] ease-out group-hover:scale-[1.05]"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-[#151b29] via-transparent to-transparent opacity-70 md:bg-gradient-to-r" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#0a0e1c] via-transparent to-transparent opacity-70 md:bg-gradient-to-r" />
 
       {src && !live && (
         <button
@@ -57,7 +57,7 @@ export default function LivePreview({
       )}
 
       {src && live && (
-        <div className="absolute inset-0 z-20 flex flex-col bg-[#0d1119]">
+        <div className="absolute inset-0 z-20 flex flex-col bg-[#070a14]">
           {/* faux browser bar */}
           <div className="flex items-center gap-3 border-b border-[var(--border)] px-3.5 py-2.5">
             <div className="flex gap-1.5">

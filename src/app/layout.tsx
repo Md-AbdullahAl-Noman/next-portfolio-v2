@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Fraunces, Inter, JetBrains_Mono } from 'next/font/google'
+import { Inter, JetBrains_Mono, Space_Grotesk } from 'next/font/google'
 import './globals.css'
 
 import Terminal from '@/components/terminal'
@@ -11,10 +11,9 @@ const sans = Inter({
   display: 'swap',
 })
 
-const displayFont = Fraunces({
+const displayFont = Space_Grotesk({
   subsets: ['latin'],
   variable: '--font-display',
-  style: ['normal', 'italic'],
   display: 'swap',
 })
 
@@ -84,7 +83,7 @@ export default function RootLayout({
           href="/favicons/apple-touch-icon.png"
         />
         <link rel="manifest" href="/favicons/site.webmanifest" />
-        <meta name="theme-color" content="#0f1420" />
+        <meta name="theme-color" content="#05070f" />
       </head>
       <body
         className={`${sans.variable} ${displayFont.variable} ${mono.variable} font-sans`}

@@ -66,7 +66,7 @@ const NavigationTab = () => {
       transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: INTRO_DELAY + 0.2 }}
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
         scrolled
-          ? 'border-b border-[var(--border)] bg-[#0f1420]/70 backdrop-blur-xl'
+          ? 'border-b border-[var(--border)] bg-[#05070f]/70 backdrop-blur-xl'
           : 'border-b border-transparent bg-transparent'
       }`}
     >
@@ -153,7 +153,7 @@ const NavigationTab = () => {
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className="overflow-hidden border-b border-[var(--border)] bg-[#0f1420]/95 backdrop-blur-xl md:hidden"
+            className="overflow-hidden border-b border-[var(--border)] bg-[#05070f]/95 backdrop-blur-xl md:hidden"
           >
             <div className="flex flex-col gap-1 px-6 pb-6 pt-2">
               {LINKS.map(({ id, label }, i) => (

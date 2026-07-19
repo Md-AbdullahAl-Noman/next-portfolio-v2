@@ -159,13 +159,13 @@ export default function Terminal() {
               animate={{ y: 0, scale: 1, opacity: 1 }}
               exit={{ y: 24, scale: 0.98, opacity: 0 }}
               transition={{ type: 'spring', stiffness: 320, damping: 30 }}
-              className="relative flex h-[70vh] max-h-[640px] w-full max-w-2xl flex-col overflow-hidden rounded-xl border border-[var(--border-strong)] bg-[#0b0e15]/95 shadow-[0_60px_160px_-40px_rgba(0,0,0,0.95)]"
+              className="relative flex h-[70vh] max-h-[640px] w-full max-w-2xl flex-col overflow-hidden rounded-xl border border-[var(--border-strong)] bg-[#070a14]/95 shadow-[0_60px_160px_-40px_rgba(0,0,0,0.95)]"
             >
               {/* title bar */}
               <div className="flex items-center gap-3 border-b border-[var(--border)] px-4 py-3">
                 <div className="flex gap-1.5">
                   <span className="size-3 rounded-full bg-[#e0776b]/70" />
-                  <span className="size-3 rounded-full bg-[#d3b384]/70" />
+                  <span className="size-3 rounded-full bg-[#fbbf24]/70" />
                   <span className="size-3 rounded-full bg-[#7ea884]/70" />
                 </div>
                 <span className="flex-1 text-center font-mono text-xs text-muted-2">
